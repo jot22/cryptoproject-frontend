@@ -1,0 +1,76 @@
+#mainContainer {
+    max-width: 500px;
+}
+
+#signInHeader {
+    color: white;
+    font-weight: 900;
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 1px;
+}
+
+#username {
+    color: #007DFF;
+    filter: drop-shadow(0px 6px 5px slategrey);
+}
+
+
+#userLabel {
+    color: white;
+    font-weight: 600;
+    font-size: 1.4em;
+}
+
+#passwordLabel {
+    color: white;
+    font-weight: 600;
+    font-size: 1.4em;
+}
+
+#registerLink {
+    color: white;
+    font-weight: 400;
+    font-size: 0.9em;
+    filter: drop-shadow(0px 6px 5px slategrey);
+}
+
+#homeLink {
+    color: white;
+    font-weight: 400;
+    font-size: 0.9em;
+    float: right;
+    filter: drop-shadow(0px 6px 5px slategrey);
+
+}
+
+#signInButton {
+    color: white;
+    font-weight: bold;
+    font-size: 1.25em;
+    border-radius: 0;
+}
+
+#password {
+    color: #007DFF;
+    filter: drop-shadow(0px 6px 5px slategrey);
+
+
+}
+
+body {
+    background: radial-gradient(circle, rgba(0, 142, 255, 0.5298494397759104) 5%, rgba(3, 22, 224, 0.8799894957983193) 100%);
+}
+
+
+
+@keyframes appear-initial {
+    from {
+        filter:blur(50px);
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
