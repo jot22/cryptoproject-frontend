@@ -1,0 +1,104 @@
+#tickerBox {
+    max-height: 47px;
+
+
+}
+
+#customerDetail {
+    color: white;
+    padding-left: 1vw;
+    font-family: Consolas, serif;
+    font-weight: 700;
+    font-size: 1.05em;
+}
+
+#customerPicture {
+    padding-left: 1vw;
+}
+
+#leftPanel {
+    background-color: #242831;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#rightPanel {
+    background-color: #2D323B;
+    min-height: 400px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#mainContentContain {
+    margin: auto;
+    height: 500px;
+
+}
+
+#t {
+    height: 100vh;
+    min-width: 1026px;
+
+}
+
+#footer {
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+    font-family: Consolas, serif;
+    border-top: 4px solid red;
+
+
+}
+
+#submitButton {
+    font-family: Consolas, serif;
+}
+
+#websiteName {
+    font-family: Consolas, serif;
+}
+
+body {
+    background-color: #353C42 !important;
+}
+
+#selectInstrument {
+    font-family: Consolas, serif;
+    font-weight: 700;
+    border-bottom: 3px solid red;
+    color: white;
+
+}
+
+#bitcoin {
+    color: white;
+    font-size: 2.5em;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+#forBitcoin {
+    padding-left: 15px;
+    font-family: Consolas, serif;
+}
+
+#forEthereum {
+    padding-left: 18px;
+    font-family: Consolas, serif;
+}
+
+#forRipple {
+    padding-left: 10px;
+    font-family: Consolas, serif;
+}
+
+#forMonero {
+    padding-left: 10px;
+    font-family: Consolas, serif;
+}
+
+
