@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './HomePage.css'
 import TradingViewWidget from 'react-tradingview-widget';
 
@@ -11,10 +12,12 @@ import TradingViewWidget from 'react-tradingview-widget';
 
 export default class HomePage extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.topTicker = React.createRef();
-
+        this.state = {
+            searchInput: ""
+        };
     }
 
 
@@ -52,7 +55,17 @@ export default class HomePage extends React.Component {
             ]
         };
         this.topTicker.current.appendChild(script);
+
     }
+
+    searchInputChanged = (event) => {
+        this.setState(
+            {
+                searchInput: event.target.value
+            }
+        );
+    };
+
 
     render() {
         return (
@@ -63,10 +76,13 @@ export default class HomePage extends React.Component {
                         <label className="navbar-brand" id={"websiteName"}>Creepo Investing | Member</label>
                         <form className="form-inline">
                             <input className="form-control mr-sm-2" type="search" placeholder="Search"
-                                   aria-label="Search"/>
-                            <button id={"submitButton"} className="btn btn-outline-success my-2 my-sm-0"
-                                    type="submit">Search
-                            </button>
+                                   aria-label="Search"
+                                   onChange={this.searchInputChanged}/>
+                            <Link to={'/details/' + this.state.searchInput}>
+                                <button id={"submitButton"} className="btn btn-outline-success my-2 my-sm-0"
+                                        type="submit">Search
+                                </button>
+                            </Link>
                             <label id={"customerDetail"}>Smith, John</label>
                             <img id={"customerPicture"} src="https://dummyimage.com/38x38/000/fff" alt="..."/>
                         </form>
