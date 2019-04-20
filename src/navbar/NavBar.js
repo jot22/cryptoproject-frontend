@@ -8,6 +8,7 @@ import Profile from "../profile/Profile";
 import Api from "../api-content/ApiContent";
 import Footer from "../footer/Footer";
 import Details from '../details/Details';
+import Portfolio from "../portfolio/Portfolio";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -72,6 +73,12 @@ export default class NavBar extends React.Component {
                             <label className="navbar-brand" id={"websiteName"}>
                                 <Link to="/" className='disabled-link'>Creepo Investing | Member</Link>
                             </label>
+                            <Link to={'/portfolio'}>
+                                <button type={'button'}
+                                        className={'btn btn-primary'}>
+                                    Portfolio
+                                </button>
+                            </Link>
                             <label className="navbar-brand" id={"apiHooks"}>
                                 <Link to="/api" className='disabled-link'>API Calls</Link>
                             </label>
@@ -103,6 +110,8 @@ export default class NavBar extends React.Component {
                                render={() => <Api/>}/>
                         <Route path={'/details/:symbol'}
                                render={() => <Details/>}/>
+                        <Route path={'/portfolio'}
+                               render={() => <Portfolio/>}/>
                     </div>
                     <Footer/>
                 </div>
