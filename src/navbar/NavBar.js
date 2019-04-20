@@ -5,7 +5,8 @@ import HomePage from "../home/HomePage";
 import Login from "../login/Login";
 import Register from "../registration/Register";
 import Profile from "../profile/Profile";
-import Api from "../api-content/ApiContent"
+import Api from "../api-content/ApiContent";
+import Footer from "../footer/Footer";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -87,6 +88,7 @@ export default class NavBar extends React.Component {
                         <Route path="/api" exact
                                 render={() => <Api/>}/>
                     </div>
+                <Footer/>
             </div>
             </Router>
         )

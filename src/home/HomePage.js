@@ -1,5 +1,5 @@
 import React from 'react';
-import './HomePage.css'
+import './HomePage.css';
 import TradingViewWidget from 'react-tradingview-widget';
 
 
@@ -17,7 +17,6 @@ export default class HomePage extends React.Component {
 
     render() {
         return (
-            <div id={"t"}>
                 <div className={"row flex-grow-1"} id={"mainContentContain"}>
                     <div className={"col-3"} id={"leftPanel"}>
                         <h3 id={"selectInstrument"}>Instrument / USD</h3>
@@ -37,18 +36,6 @@ export default class HomePage extends React.Component {
                     </div>
 
                 </div>
-
-                <div id={"footer"}>
-
-                    <label>
-                        Copyright Creepo Investment Inc. 2019 - All Rights Reserved, Established 2019.
-                    </label>
-                    <p>About:
-                        Welcome to Creepo Investment Inc, where we take care of all your most delicate financial needs.
-                    </p>
-                </div>
-            </div>
-
         )
 
     }
