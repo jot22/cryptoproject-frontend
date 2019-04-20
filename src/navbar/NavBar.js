@@ -2,6 +2,10 @@ import React from 'react';
 import '../home/HomePage.css';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import HomePage from "../home/HomePage";
+import Login from "../login/Login";
+import Register from "../registration/Register";
+import Profile from "../profile/Profile";
+import Api from "../api-content/ApiContent"
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -48,12 +52,17 @@ export default class NavBar extends React.Component {
 
     render() {
         return (
+            <Router>
             <div id={"t"}>
                 <div id={"nav-bars"}>
                     <div id={"tickerBox"} ref={this.topTicker}/>
                     <nav className="navbar navbar-dark bg-dark justify-content-between">
-                        <label className="navbar-brand" id={"websiteName"}>Creepo Investing | Member</label>
-                        <label className="navbar-brand" id={"apiHooks"}>API Calls</label>
+                        <label className="navbar-brand" id={"websiteName"}>
+                            <Link to="/" className='disabled-link'>Creepo Investing | Member</Link>
+                        </label>
+                        <label className="navbar-brand" id={"apiHooks"}>
+                            <Link to="/api" className='disabled-link'>API Calls</Link>
+                        </label>
                         <form className="form-inline">
                             <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                    aria-label="Search"/>
@@ -65,14 +74,21 @@ export default class NavBar extends React.Component {
                         </form>
                     </nav>
                 </div>
-                <Router>
                     <div>
                         <Route path="/"
                                exact
                                component={HomePage}/>
+                        <Route path="/login" exact
+                               render={() => <Login/>}/>
+                        <Route path="/register" exact
+                               render={() => <Register/>}/>
+                        <Route path="/profile" exact
+                               render={() => <Profile/>}/>
+                        <Route path="/api" exact
+                                render={() => <Api/>}/>
                     </div>
-                </Router>
             </div>
+            </Router>
         )
     }
 }

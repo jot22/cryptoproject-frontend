@@ -101,4 +101,16 @@ body {
     font-family: Consolas, serif;
 }
 
+/* css file */
+.disabled-link {
+    color: white;
+}
+
+.disabled-link:hover {
+    color: white;
+}
+
+.White {
+    color: white;
+}
 
