@@ -7,12 +7,15 @@ import Register from "../registration/Register";
 import Profile from "../profile/Profile";
 import Api from "../api-content/ApiContent";
 import Footer from "../footer/Footer";
+import Details from '../details/Details';
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.topTicker = React.createRef();
-
+        this.state = {
+            searchInput: ""
+        };
     }
 
     componentDidMount() {
@@ -51,30 +54,41 @@ export default class NavBar extends React.Component {
         this.topTicker.current.appendChild(script);
     }
 
+    searchInputChanged = (event) => {
+        this.setState(
+            {
+                searchInput: event.target.value
+            }
+        );
+    };
+
     render() {
         return (
             <Router>
-            <div id={"t"}>
-                <div id={"nav-bars"}>
-                    <div id={"tickerBox"} ref={this.topTicker}/>
-                    <nav className="navbar navbar-dark bg-dark justify-content-between">
-                        <label className="navbar-brand" id={"websiteName"}>
-                            <Link to="/" className='disabled-link'>Creepo Investing | Member</Link>
-                        </label>
-                        <label className="navbar-brand" id={"apiHooks"}>
-                            <Link to="/api" className='disabled-link'>API Calls</Link>
-                        </label>
-                        <form className="form-inline">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search"
-                                   aria-label="Search"/>
-                            <button id={"submitButton"} className="btn btn-outline-success my-2 my-sm-0"
-                                    type="submit">Search
-                            </button>
-                            <label id={"customerDetail"}>Smith, John</label>
-                            <img id={"customerPicture"} src="https://dummyimage.com/38x38/000/fff" alt="..."/>
-                        </form>
-                    </nav>
-                </div>
+                <div id={"t"}>
+                    <div id={"nav-bars"}>
+                        <div id={"tickerBox"} ref={this.topTicker}/>
+                        <nav className="navbar navbar-dark bg-dark justify-content-between">
+                            <label className="navbar-brand" id={"websiteName"}>
+                                <Link to="/" className='disabled-link'>Creepo Investing | Member</Link>
+                            </label>
+                            <label className="navbar-brand" id={"apiHooks"}>
+                                <Link to="/api" className='disabled-link'>API Calls</Link>
+                            </label>
+                            <form className="form-inline">
+                                <input className="form-control mr-sm-2" type="search" placeholder="Search"
+                                       aria-label="Search"
+                                       onChange={this.searchInputChanged}/>
+                                <Link to={'/details/' + this.state.searchInput}>
+                                    <button id={"submitButton"} className="btn btn-outline-success my-2 my-sm-0"
+                                            type="submit">Search
+                                    </button>
+                                </Link>
+                                <label id={"customerDetail"}>Smith, John</label>
+                                <img id={"customerPicture"} src="https://dummyimage.com/38x38/000/fff" alt="..."/>
+                            </form>
+                        </nav>
+                    </div>
                     <div>
                         <Route path="/"
                                exact
@@ -86,10 +100,12 @@ export default class NavBar extends React.Component {
                         <Route path="/profile" exact
                                render={() => <Profile/>}/>
                         <Route path="/api" exact
-                                render={() => <Api/>}/>
+                               render={() => <Api/>}/>
+                        <Route path={'/details/:symbol'}
+                               render={() => <Details/>}/>
                     </div>
-                <Footer/>
-            </div>
+                    <Footer/>
+                </div>
             </Router>
         )
     }
