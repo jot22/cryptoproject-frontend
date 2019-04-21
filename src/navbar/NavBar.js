@@ -9,6 +9,7 @@ import Api from "../api-content/ApiContent";
 import Footer from "../footer/Footer";
 import Details from '../details/Details';
 import Portfolio from "../portfolio/Portfolio";
+import Search from "../search/Search";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -86,9 +87,11 @@ export default class NavBar extends React.Component {
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
                                        onChange={this.searchInputChanged}/>
-                                <Link to={'/details/' + this.state.searchInput}>
-                                    <button id={"submitButton"} className="btn btn-outline-success my-2 my-sm-0"
-                                            type="submit">Search
+                                <Link to={'/search/' + this.state.searchInput}>
+                                    <button id={"submitButton"}
+                                            className="btn btn-outline-success my-2 my-sm-0"
+                                            type="submit">
+                                        Search
                                     </button>
                                 </Link>
                                 <label id={"customerDetail"}>Smith, John</label>
@@ -112,6 +115,8 @@ export default class NavBar extends React.Component {
                                render={() => <Details/>}/>
                         <Route path={'/portfolio'}
                                render={() => <Portfolio/>}/>
+                        <Route path={'/search/:criteria'}
+                               component={Search}/>
                     </div>
                     <Footer/>
                 </div>
