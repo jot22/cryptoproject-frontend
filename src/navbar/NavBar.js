@@ -177,10 +177,12 @@ export default class NavBar extends React.Component {
                         <Route path="/api" exact
                                render={() => <Api/>}/>
                         <Route path={'/details/:symbol'}
-                               render={() => <Details/>}/>
+                               exact
+                               component={Details}/>
                         <Route path={'/portfolio'}
                                render={() => <Portfolio/>}/>
                         <Route path={'/search/:criteria'}
+                               exact
                                component={Search}/>
                     </div>
                     <Footer/>
