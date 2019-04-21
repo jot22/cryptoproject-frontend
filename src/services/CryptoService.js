@@ -12,7 +12,6 @@ export default class CryptoService{
 
     findAllCrypto = () => {
         return fetch(CRYPTO_API_URL, {
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
