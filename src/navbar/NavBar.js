@@ -61,8 +61,8 @@ export default class NavBar extends React.Component {
         let loggedIn = true;
         if (loggedIn) {
             buffer.push(
-                <Link to={'/profile'}>
-                    <label id={"customerDetail"}>Smith, John</label>
+                <Link to={'/profile'} id={"customerDetail"}>
+                    Smith, John
                 </Link>
             );
             buffer.push(

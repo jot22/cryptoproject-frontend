@@ -8,7 +8,10 @@
     font-family: Consolas, serif;
     font-weight: 700;
     font-size: 1.05em;
+    text-decoration: none;
+
 }
+
 
 #customerPicture {
     background-color: black;
