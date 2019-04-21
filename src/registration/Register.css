@@ -1,6 +1,5 @@
 #mainContainer {
     max-width: 500px;
-
 }
 
 #username {
@@ -32,10 +31,13 @@
     color: white;
     font-weight: 600;
     font-size: 1.4em;
-    filter: drop-shadow(0px 6px 5px slategrey);
-
 }
 
 #widgetSelectHeading{
-    filter: drop-shadow(0px 6px 5px slategrey);
+    filter: drop-shadow(0px 6px 5px black);
+}
+
+#registerContainer{
+    background-color: darkslategray;
+    padding-bottom:1px;
 }

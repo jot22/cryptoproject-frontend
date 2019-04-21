@@ -125,6 +125,7 @@ export default class Register extends React.Component {
            // return <Redirect to='/'/>
         }
         return (
+            <div id={"registerContainer"}>
             <div id="mainContainer" className="container">
                 <div className="col-sm-10">
                     <h1 id={"registerText"}>Register</h1>
@@ -219,7 +220,7 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                 </form>
-
+            </div>
             </div>
         )
     }

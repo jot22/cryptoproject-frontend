@@ -1,0 +1,33 @@
+#searchHeader {
+    color: white;
+    font-size: 3.7em;
+    font-family: Consolas, serif;
+    font-weight: 900;
+    border-bottom: 3px solid red;
+    max-width: 480px;
+
+}
+
+#mainSearchContainer {
+    background-color: darkslategray;
+    padding: 10px 35px 20px;
+}
+
+#eachListItem {
+    font-family: Consolas, serif;
+}
+
+
+#perCryptoResult:hover {
+    color: darkslategray;
+    text-decoration: darkslategray solid underline;
+}
+
+#perCryptoResult {
+    text-decoration: none;
+    color: lightslategray;
+}
+
+#searchAll {
+    filter: drop-shadow(0px 6px 5px black);
+}

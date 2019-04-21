@@ -1,7 +1,5 @@
 #tickerBox {
     max-height: 47px;
-
-
 }
 
 #customerDetail {
@@ -10,10 +8,49 @@
     font-family: Consolas, serif;
     font-weight: 700;
     font-size: 1.05em;
+    text-decoration: none;
+
 }
 
+
 #customerPicture {
-    padding-left: 1vw;
+    background-color: black;
+    border-color: black;
+    font-family: Consolas, serif;
+    margin-right: 4px;
+    margin-left: 8px;
+}
+
+#customerPicture:active, #customerPicture:focus {
+    box-shadow: none;
+    border-color: darkslategray;
+}
+
+#customerPicture:hover{
+    background-color:darkslategray;
+    border-color: darkslategray;
+}
+
+#buttonDivider {
+    border-left: 4px red solid;
+    min-height: 40px;
+    margin-right: 4px;
+}
+
+#portfolioButton {
+    background-color: black;
+    border-color: black;
+    font-family: Consolas, serif;
+}
+
+#portfolioButton:hover{
+    background-color:darkslategray;
+    border-color: darkslategray;
+}
+
+#portfolioButton:active, #portfolioButton:focus {
+    box-shadow: none;
+    border-color: darkslategray;
 }
 
 #leftPanel {
@@ -32,7 +69,6 @@
 #mainContentContain {
     margin: auto;
     height: 500px;
-
 }
 
 #t {
@@ -60,6 +96,11 @@
 
 #websiteName {
     font-family: Consolas, serif;
+    color: white;
+}
+
+#websiteName:hover {
+    text-decoration: none;
 }
 
 body {
@@ -101,16 +142,7 @@ body {
     font-family: Consolas, serif;
 }
 
-/* css file */
-.disabled-link {
-    color: white;
-}
 
-.disabled-link:hover {
-    color: white;
-}
 
-.White {
-    color: white;
-}
+
 

@@ -1,8 +1,9 @@
 let CRYPTO_API_URL =
     'http://localhost:8080/api/crypto';
 
-export default class CryptoService{
+export default class CryptoService {
     static myInstance = null;
+
     static getInstance() {
         if (CryptoService.myInstance == null) {
             CryptoService.myInstance = new CryptoService();
@@ -18,4 +19,5 @@ export default class CryptoService{
         }).then(response =>
             response.json());
     };
+
 }
