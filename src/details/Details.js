@@ -88,7 +88,7 @@ export default class Details extends React.Component {
                 <h1 id={"detailHeader"}>Details</h1>
                 <div className="card" id={"cardContain"}>
                     <div className="card-header" id={"cardHeader"}>
-                        <h1>BTC</h1>
+                        <h1>{this.state.crypto.data[this.symbol].name}</h1>
                         {this.displayCorrectBox()}
                     </div>
                     <div className="card-body">
@@ -104,5 +104,3 @@ export default class Details extends React.Component {
         );
     }
 }
-
-//

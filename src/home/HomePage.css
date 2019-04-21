@@ -26,8 +26,8 @@
     border-color: darkslategray;
 }
 
-#customerPicture:hover{
-    background-color:darkslategray;
+#customerPicture:hover {
+    background-color: darkslategray;
     border-color: darkslategray;
 }
 
@@ -43,8 +43,8 @@
     font-family: Consolas, serif;
 }
 
-#portfolioButton:hover{
-    background-color:darkslategray;
+#portfolioButton:hover {
+    background-color: darkslategray;
     border-color: darkslategray;
 }
 
@@ -112,7 +112,11 @@ body {
     font-weight: 700;
     border-bottom: 3px solid red;
     color: white;
+}
 
+#portfolioValue {
+    font-family: Consolas, serif;
+    color: white;
 }
 
 #bitcoin {
