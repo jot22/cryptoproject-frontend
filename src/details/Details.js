@@ -8,6 +8,7 @@ export default class Details extends React.Component {
         this.coinMarketService = CoinMarketService.getInstance();
         this.symbol = props.match.params.symbol;
         this.state = {
+            shares: '',
             crypto: {
                 data: {}
             }
@@ -35,6 +36,18 @@ export default class Details extends React.Component {
             });
     }
 
+    sharesInputChanged = (event) => {
+        this.setState(
+            {
+                shares: event.target.value
+            }
+        );
+    };
+
+    investAsInvestor = () => {
+        console.log(this.state.shares)
+    };
+
     render() {
         return (
             <div id={"mainDetailContainer"}>
@@ -42,6 +55,22 @@ export default class Details extends React.Component {
                 <div className="card" id={"cardContain"}>
                     <div className="card-header" id={"cardHeader"}>
                         <h1>{this.state.crypto.data[this.symbol].name}</h1>
+                        <span className={'form-group row float-right'}>
+                        <input className={'form-control col-sm-9'}
+                               placeholder={'Number of Shares'}
+                               type={'search'}
+                               onChange={this.sharesInputChanged}/>
+                               <select className={'form-control'}>
+                                   <option>
+                                       Client List
+                                   </option>
+                               </select>
+                               <button className={'btn btn-success'}
+                                       type={'button'}
+                                       onClick={this.investAsInvestor}>
+                                   Invest
+                               </button>
+                        </span>
                     </div>
                     <div className="card-body">
                         <h5>Symbol: {this.state.crypto.data[this.symbol].symbol}</h5>
