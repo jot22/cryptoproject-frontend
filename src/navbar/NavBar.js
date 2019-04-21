@@ -58,7 +58,7 @@ export default class NavBar extends React.Component {
 
     loadButtonsLoggedInNot = () => {
         let buffer = [];
-        let loggedIn = false;
+        let loggedIn = true;
         if (loggedIn) {
             buffer.push(
                 <Link to={'/profile'}>
