@@ -48,29 +48,48 @@ export default class Details extends React.Component {
         console.log(this.state.shares)
     };
 
+    displayCorrectBox = () => {
+        let buffer = [];
+        let role = "BROKER";
+        switch (role) {
+            case "INVESTOR":
+                buffer.push(
+                    <div className="btn-group" role="group" id={"investorBox"}>
+                        <input type="text" className="form-control" placeholder="# of Shares"/>
+                        <button type="button" className="btn btn-success btn-block">Request Shares</button>
+                    </div>
+                );
+                break;
+            case "BROKER":
+                buffer.push(
+                    <div className="btn-group" role="group">
+                        <input type="text" className="form-control" placeholder="# of Shares"/>
+                        <select className={'form-control'}>
+                            <option>
+                                Client List
+                            </option>
+                        </select>
+                        <button type="button" className="btn btn-success btn-block">Invest</button>
+                    </div>
+                );
+                break;
+            default:
+                return buffer;
+
+        }
+        return buffer;
+
+
+    };
+
     render() {
         return (
             <div id={"mainDetailContainer"}>
                 <h1 id={"detailHeader"}>Details</h1>
                 <div className="card" id={"cardContain"}>
                     <div className="card-header" id={"cardHeader"}>
-                        <h1>{this.state.crypto.data[this.symbol].name}</h1>
-                        <span className={'form-group row float-right'}>
-                        <input className={'form-control col-sm-9'}
-                               placeholder={'Number of Shares'}
-                               type={'search'}
-                               onChange={this.sharesInputChanged}/>
-                               <select className={'form-control'}>
-                                   <option>
-                                       Client List
-                                   </option>
-                               </select>
-                               <button className={'btn btn-success'}
-                                       type={'button'}
-                                       onClick={this.investAsInvestor}>
-                                   Invest
-                               </button>
-                        </span>
+                        <h1>BTC</h1>
+                        {this.displayCorrectBox()}
                     </div>
                     <div className="card-body">
                         <h5>Symbol: {this.state.crypto.data[this.symbol].symbol}</h5>
@@ -85,3 +104,5 @@ export default class Details extends React.Component {
         );
     }
 }
+
+//

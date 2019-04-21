@@ -9,6 +9,8 @@
 #mainDetailContainer {
     padding: 10px 35px 20px;
     background-color: darkslategray;
+    font-family: Consolas, serif;
+
 }
 
 #detailHeader{
@@ -19,3 +21,8 @@
     border-bottom: 3px solid red;
     max-width: 250px;
 }
+
+#investorBox{
+    font-family: Consolas, serif;
+}
+
