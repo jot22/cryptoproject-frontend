@@ -49,7 +49,7 @@ export default class Portfolio extends Component {
                             <th>Total</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id={"tableBodyPort"}>
                         {
                             this.state.investments.map(investment => {
                                     return (

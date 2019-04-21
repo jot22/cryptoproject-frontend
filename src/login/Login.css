@@ -1,3 +1,8 @@
+#loginContainer {
+    background-color: darkslategray;
+    padding-bottom:1px;
+}
+
 #mainContainer {
     max-width: 500px;
 }
@@ -8,12 +13,12 @@
     font-size: 3.5em;
     text-align: center;
     margin-bottom: 20px;
-    margin-top: 1px;
+    padding-top: 1px;
 }
 
 #username {
     color: #007DFF;
-    filter: drop-shadow(0px 6px 5px slategrey);
+    filter: drop-shadow(0px 6px 5px black);
 }
 
 
@@ -54,23 +59,10 @@
 
 #password {
     color: #007DFF;
-    filter: drop-shadow(0px 6px 5px slategrey);
-
-
+    filter: drop-shadow(0px 6px 5px black);
 }
 
 body {
     background: radial-gradient(circle, rgba(0, 142, 255, 0.5298494397759104) 5%, rgba(3, 22, 224, 0.8799894957983193) 100%);
-}
-
-
-
-@keyframes appear-initial {
-    from {
-        filter:blur(50px);
-    }
-    to {
-        opacity: 100%;
-    }
 }
 

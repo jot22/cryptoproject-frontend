@@ -35,6 +35,7 @@ export default class Login extends React.Component {
             //return <Redirect to='/'/>
         }
         return (
+            <div id={"loginContainer"}>
             <div id="mainContainer" className="container">
                 <div className="col-sm-10">
                     <h1 id="signInHeader">Log In</h1>
@@ -77,6 +78,7 @@ export default class Login extends React.Component {
                         </div>
                     </div>
                 </form>
+            </div>
             </div>
         )
     }

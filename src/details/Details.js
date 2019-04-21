@@ -26,16 +26,19 @@ export default class Details extends React.Component {
         return (
             this.state.results.map((crypto) => {
                     return (
-                        <div className="card" id={"cardContain"}>
-                            <div className="card-header">
-                                <h1>{crypto.name}</h1>
-                            </div>
-                            <div className="card-body">
-                                <h5>Symbol: {crypto.symbol}</h5>
-                                <h5>Price: {crypto.quote.USD.price}</h5>
-                                <h5>Market Cap: {crypto.quote.USD.market_cap}</h5>
-                                <h5>Volume: {crypto.quote.USD.volume_24h}</h5>
-                                <h5>24 Hour Change: {crypto.quote.USD.percent_change_24h}%</h5>
+                        <div id={"mainDetailContainer"}>
+                            <h1 id={"detailHeader"}>Details</h1>
+                            <div className="card" id={"cardContain"}>
+                                <div className="card-header" id={"cardHeader"}>
+                                    <h1>{crypto.name}</h1>
+                                </div>
+                                <div className="card-body">
+                                    <h5>Symbol: {crypto.symbol}</h5>
+                                    <h5>Price: {crypto.quote.USD.price}</h5>
+                                    <h5>Market Cap: {crypto.quote.USD.market_cap}</h5>
+                                    <h5>Volume: {crypto.quote.USD.volume_24h}</h5>
+                                    <h5>24 Hour Change: {crypto.quote.USD.percent_change_24h}%</h5>
+                                </div>
                             </div>
                         </div>
                     );

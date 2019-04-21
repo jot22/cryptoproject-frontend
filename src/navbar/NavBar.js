@@ -56,6 +56,77 @@ export default class NavBar extends React.Component {
         this.topTicker.current.appendChild(script);
     }
 
+    loadButtonsLoggedInNot = () => {
+        let buffer = [];
+        let loggedIn = false;
+        if (loggedIn) {
+            buffer.push(
+                <Link to={'/profile'}>
+                    <label id={"customerDetail"}>Smith, John</label>
+                </Link>
+            );
+            buffer.push(
+                <Link to={'/profile'}>
+                    <button type={'button'}
+                            id={"customerPicture"}
+                            className={'btn btn-primary'}>
+                        Profile
+                    </button>
+                </Link>
+            );
+            buffer.push(
+                <div id={"buttonDivider"}/>
+            );
+            buffer.push(
+                <Link to={'/portfolio'}>
+                    <button type={'button'}
+                            id={"portfolioButton"}
+                            className={'btn btn-primary'}>
+                        Portfolio
+                    </button>
+                </Link>
+            )
+        } else {
+            buffer.push(
+                <Link to={'/register'}>
+                    <button type={'button'}
+                            id={"customerPicture"}
+                            className={'btn btn-primary'}>
+                        Register
+                    </button>
+                </Link>
+            );
+            buffer.push(
+                <div id={"buttonDivider"}/>
+            );
+            buffer.push(
+                <Link to={'/login'}>
+                    <button type={'button'}
+                            id={"portfolioButton"}
+                            className={'btn btn-primary'}>
+                        Login
+                    </button>
+                </Link>
+            )
+        }
+        return buffer;
+    };
+
+    properRole = () => {
+        let role = 2;
+        switch (role) {
+            case 1:
+                return "Guest";
+            case 2:
+                return "Member";
+            case 3:
+                return "Broker";
+            default:
+                return "Guest";
+        }
+
+    };
+
     searchInputChanged = (event) => {
         this.setState(
             {
@@ -71,16 +142,11 @@ export default class NavBar extends React.Component {
                     <div id={"nav-bars"}>
                         <div id={"tickerBox"} ref={this.topTicker}/>
                         <nav className="navbar navbar-dark bg-dark justify-content-between">
-                            <label className="navbar-brand" id={"websiteName"}>
-                                <Link to="/" className='disabled-link'>Creepo Investing | Member</Link>
+                            <label className="navbar-brand">
+                                <Link to="/" id={"websiteName"}>Creepo Investing | {this.properRole()}</Link>
                             </label>
-                            <Link to={'/portfolio'}>
-                                <button type={'button'}
-                                        className={'btn btn-primary'}>
-                                    Portfolio
-                                </button>
-                            </Link>
-                            <label className="navbar-brand" id={"apiHooks"}>
+
+                            <label className="navbar-brand " id={"apiHooks"}>
                                 <Link to="/api" className='disabled-link'>API Calls</Link>
                             </label>
                             <form className="form-inline">
@@ -94,8 +160,7 @@ export default class NavBar extends React.Component {
                                         Search
                                     </button>
                                 </Link>
-                                <label id={"customerDetail"}>Smith, John</label>
-                                <img id={"customerPicture"} src="https://dummyimage.com/38x38/000/fff" alt="..."/>
+                                {this.loadButtonsLoggedInNot()}
                             </form>
                         </nav>
                     </div>
