@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import './Search.css'
 
 export default class Search extends Component {
     constructor(props) {
@@ -7,7 +8,8 @@ export default class Search extends Component {
         this.searchCriteria = props.match.params.criteria;
         this.state = {
             results: [
-                {name: 'BTC'}
+                {name: 'BTC'}, {name: 'TFR'}
+
             ]
         }
     }
@@ -18,15 +20,16 @@ export default class Search extends Component {
 
     render() {
         return (
-            <div>
+            <div id={"mainSearchContainer"}>
+                <h1 id={"searchHeader"}>Search Results</h1>
                 <ul className={'list-group'}>
                     {
-                        this.state.results.map((crypto) => {
+                        this.state.results.map((crypto,i) => {
                                 return (
-                                    <li className={'list-group-item'}>
+                                    <li id={"eachListItem"} className={'list-group-item py-0 list-group-item-action'}>
                                         <Link to={'/details/' + crypto.name}>
                                             <h1>
-                                                {crypto.name}
+                                                {i+1}. {crypto.name}
                                             </h1>
                                         </Link>
                                     </li>

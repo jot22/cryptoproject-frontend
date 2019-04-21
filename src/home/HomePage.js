@@ -63,25 +63,25 @@ export default class HomePage extends React.Component {
 
     render() {
         return (
-                <div className={"row flex-grow-1"} id={"mainContentContain"}>
-                    <div className={"col-3"} id={"leftPanel"}>
-                        <h3 id={"selectInstrument"}>Instrument / USD</h3>
-                        <i className="fab fa-bitcoin" id={"bitcoin"}><label id={"forBitcoin"}>Bitcoin</label></i>
-                        <i className="fab fa-ethereum" id={"bitcoin"}><label id={"forEthereum"}>Ethereum</label></i>
-                        <i className="fab fa-monero" id={"bitcoin"}><label id={"forMonero"}>Monero</label></i>
-                        <i className="fas fa-coins" id={"bitcoin"}><label id={"forRipple"}>Ripple</label></i>
+            <div className={"row flex-grow-1"} id={"mainContentContain"}>
+                <div className={"col-3"} id={"leftPanel"}>
+                    <h3 id={"selectInstrument"}>Instrument / USD</h3>
+                    <i className="fab fa-bitcoin" id={"bitcoin"}><label id={"forBitcoin"}>Bitcoin</label></i>
+                    <i className="fab fa-ethereum" id={"bitcoin"}><label id={"forEthereum"}>Ethereum</label></i>
+                    <i className="fab fa-monero" id={"bitcoin"}><label id={"forMonero"}>Monero</label></i>
+                    <i className="fas fa-coins" id={"bitcoin"}><label id={"forRipple"}>Ripple</label></i>
 
-
-                    </div>
-                    <div className={"col-9"} id={"rightPanel"}>
-                        <TradingViewWidget symbol="COINBASE:BTCUSD" autosize={"true"}
-                                           theme={"dark"}
-                                           hide_top_toolbar={"true"}
-                                           toolbar_bg={"rgba(23, 32, 40, 1)"}
-                                           news={["headlines"]}/>
-                    </div>
 
                 </div>
+                <div className={"col-9"} id={"rightPanel"}>
+                    <TradingViewWidget symbol="COINBASE:BTCUSD" autosize={"true"}
+                                       theme={"dark"}
+                                       hide_top_toolbar={"true"}
+                                       toolbar_bg={"rgba(23, 32, 40, 1)"}
+                                       news={["headlines"]}/>
+                </div>
+
+            </div>
         )
 
     }

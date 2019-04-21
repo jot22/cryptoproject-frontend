@@ -1,0 +1,33 @@
+#mainPortfolioContainer {
+    background-color: darkslategray;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 10px;
+}
+
+#portHeader {
+    color: white;
+    font-size: 3.7em;
+    font-family: Consolas, serif;
+    font-weight: 900;
+    border-bottom: 3px solid red;
+    max-width: 325px;
+}
+
+#tableHead {
+    background-color: #EFEFEF;
+    font-family: Consolas, serif;
+    font-size:1.2em;
+
+
+}
+
+#tableRows:hover td {
+    background: whitesmoke;
+}
+
+#tableRows {
+    background-color: white;
+    font-family: Consolas, serif;
+    font-size:1.05em;
+}
