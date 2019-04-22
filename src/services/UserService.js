@@ -23,7 +23,6 @@ export default class UserService {
     login = (user) => {
         return fetch(USER_API_URL + "login", {
             body: JSON.stringify(user),
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,7 +34,6 @@ export default class UserService {
 
     logout = () => {
         fetch(USER_API_URL + "logout", {
-            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,9 +44,13 @@ export default class UserService {
 
     profile = () => {
         return fetch(USER_API_URL + "profile", {
-            credentials: "include"
-        })
-            .then(response => response.json());
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => response.json())
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     updateProfile = (user) => {
@@ -59,19 +61,17 @@ export default class UserService {
             headers: {
                 'content-type' : 'application/json'
             }
-        })
-            .then(response =>
+        }).then(response =>
                 response.json());
     }
 
     register = (user) => {
         return fetch(USER_API_URL + "register", {
-            credentials: "include",
-            method: 'post',
             body: JSON.stringify(user),
             headers: {
-                'content-type' : 'application/json'
-            }
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
         }).then(response =>
             response.json());
     }
