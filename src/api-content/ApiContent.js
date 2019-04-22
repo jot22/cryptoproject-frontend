@@ -16,7 +16,7 @@ export default class ApiContent extends React.Component {
     }
 
     componentDidMount() {
-        let newUser = {username: this.state.username, password: this.state.password};
+        let newUser = {username: "Carol", password: "Lynn"};
         this.userService.register(newUser).then(newUser => {
             this.setState({
                 crypto: crypto
