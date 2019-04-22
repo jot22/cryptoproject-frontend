@@ -12,16 +12,23 @@ export default class ApiContent extends React.Component {
             crypto: [],
             user: {}
         }
-
     }
 
     componentDidMount() {
-        let newUser = {username: "Carol", password: "Lynn"};
-        this.userService.register(newUser).then(newUser => {
-            this.setState({
-                crypto: crypto
-            });
-            console.log(newUser);
+        let newNewUser = {
+            username: "Yo",
+            password: "Buck"
+        };
+        this.userService.login(newNewUser).then(registered => {
+            console.log("REGISTERED");
+            console.log(registered);
+        });
+    }
+
+    profile() {
+        this.userService.profile().then(regi => {
+            console.log("PROFILE");
+            console.log(regi);
         })
     }
 
@@ -29,6 +36,9 @@ export default class ApiContent extends React.Component {
         return(
             <div className={"White"}>
                 Hello World!
+                <button type="button" className="btn btn-success " id={"profile"}
+                        onClick={() => this.profile()}>Profile
+                </button>
             </div>
         )
     }
