@@ -26,7 +26,6 @@ export default class InvestorService {
 
     findTradeByInvestor = (investorId) => {
         return fetch(INVEST_API_URL + "investor/" + investorId + "/trade", {
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

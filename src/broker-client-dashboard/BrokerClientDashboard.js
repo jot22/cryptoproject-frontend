@@ -1,28 +1,42 @@
 import React, {Component} from 'react';
 import './BrokerClientDashboard.css'
+import UserService from "../services/UserService";
+import InvestorService from "../services/InvestorService";
+import BrokerService from "../services/BrokerService";
 
 export default class BrokerClientDashboard extends Component {
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
+        this.investorService = InvestorService.getInstance();
+        this.brokerService = BrokerService.getInstance();
         this.state = {
-            investments: [
-                {
-                    name: 'Bitcoin',
-                    symbol: 'BTC',
-                    shares: 10,
-                    type: 'PROCESSED',
-                    dollar_change: 50.00,
-                    percent_change: 1.20
-                },
-                {
-                    name: 'Ethereum',
-                    symbol: 'ETH',
-                    shares: 5,
-                    type: 'PENDING'
-                }
-            ]
+            investments: []
         }
     }
+
+
+    componentDidMount() {
+        this.userService.profile().then(
+            user => {
+                this.investorService.findTradeByInvestor(user._id)
+                    .then(trades => {
+                        console.log(trades)
+                        this.setState({
+                            user: user,
+                            investments: trades
+                        })
+                    })
+            }
+        )
+    }
+
+    sellTrade = (trade) => {
+        trade.sold = true;
+        this.brokerService.updateTrade(trade._id, trade)
+            .then(response => console.log(response));
+    }
+
 
     render() {
         return (
@@ -52,6 +66,7 @@ export default class BrokerClientDashboard extends Component {
                         <thead id="tableHead">
                         <tr>
                             <th>Coin</th>
+                            <th>Shares</th>
                             <th>Buy Price $</th>
                             <th>
                                 <div>Current Value $</div>
@@ -67,10 +82,13 @@ export default class BrokerClientDashboard extends Component {
                                     return (
                                         <tr id={"tableRows"}>
                                             <td>
-                                                {investment.name} ({investment.symbol})
+                                                {investment.crypto} ({investment.symbol})
                                             </td>
                                             <td>
-                                                {investment.shares}
+                                                {investment.tokens}
+                                            </td>
+                                            <td>
+                                                {investment.priceWhenBought}
                                             </td>
                                             <td>
                                                 {(investment.type === 'PROCESSED' &&
@@ -87,8 +105,9 @@ export default class BrokerClientDashboard extends Component {
                                                 <input placeholder="Amount To Sell"/>
                                             </td>
                                             <td>
-                                                <button type="button" className="btn btn-danger">Sell</button>
-
+                                                <button type="button" className="btn btn-danger"
+                                                        onClick={() => this.sellTrade(investment)}>Sell
+                                                </button>
                                             </td>
                                         </tr>
                                     )

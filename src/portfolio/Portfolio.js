@@ -1,38 +1,34 @@
 import React, {Component} from 'react';
 import './Portfolio.css'
 import UserService from "../services/UserService";
+import InvestorService from "../services/InvestorService";
 
 export default class Portfolio extends Component {
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
+        this.investorService = InvestorService.getInstance();
         this.state = {
             user: {},
-            investments: [
-                {
-                    name: 'Bitcoin',
-                    symbol: 'BTC',
-                    shares: 10,
-                    type: 'PROCESSED',
-                    dollar_change: 50.00,
-                    percent_change: 1.20
-                },
-                {
-                    name: 'Ethereum',
-                    symbol: 'ETH',
-                    shares: 5,
-                    type: 'PENDING'
-                }
-            ]
+            investments: []
         }
     }
 
     componentDidMount() {
+        console.log(this.state.investments)
         this.userService.profile().then(
             user => {
-                this.setState({user: user})
+                this.investorService.findTradeByInvestor(user._id)
+                    .then(trades => {
+                        console.log(user)
+                        console.log(trades)
+                        this.setState({
+                            user: user,
+                            investments: trades
+                        })
+                    })
             }
-        );
+        )
     }
 
     render() {
