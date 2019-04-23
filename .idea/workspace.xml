@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e83d7746-8695-45ca-bcf5-0baf3677cd3b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navbar/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/NavBar.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,11 +16,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js">
+        <entry file="file://$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="28" column="45" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="45" />
+            <state relative-caret-position="-346">
+              <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -29,43 +34,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="24" selection-start-column="24" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/home/HomePage.js">
+        <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="30" column="61" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="61" />
+              <caret line="41" column="24" selection-start-line="41" selection-end-line="42" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/navbar/NavBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -81,9 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>widgetSelectHeading</find>
-      <find>Link</find>
-      <find>signInButton</find>
       <find>homeLink</find>
       <find>registerLink</find>
       <find>passwordLabel</find>
@@ -111,6 +83,9 @@
       <find>portfolio</find>
       <find>portHeader</find>
       <find>mainPortfolioContainer</find>
+      <find>portflo</find>
+      <find>BrokerDash</find>
+      <find>button</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,9 +116,10 @@
         <option value="$PROJECT_DIR$/src/investor-dashboard/InvestorDashboard.css" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/InvestorDashboard.js" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/BrokerDashboard.js" />
+        <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" />
         <option value="$PROJECT_DIR$/src/navbar/NavBar.js" />
         <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" />
-        <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" />
+        <option value="$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.js" />
       </list>
     </option>
   </component>
@@ -171,6 +147,12 @@
               <item name="crypto-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="crypto-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crypto-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crypto-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="broker-client-dashboard" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="crypto-frontend" type="b2602c69:ProjectViewProjectNode" />
@@ -246,7 +228,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37864000" />
+    <option name="totallyTimeSpent" value="39031000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1316" height="784" extended-state="6" />
@@ -440,13 +422,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/navbar/NavBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/portfolio/Portfolio.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -466,15 +441,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/navbar/NavBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="183" column="67" selection-start-line="183" selection-start-column="67" selection-end-line="183" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="28" column="45" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="45" />
+        <state relative-caret-position="190">
+          <caret line="41" column="24" selection-start-line="41" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-346">
+          <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

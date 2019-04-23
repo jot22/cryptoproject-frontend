@@ -10,6 +10,7 @@ import Footer from "../footer/Footer";
 import Details from '../details/Details';
 import Search from "../search/Search";
 import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
+import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -180,7 +181,7 @@ export default class NavBar extends React.Component {
                                exact
                                component={Details}/>
                         <Route path={'/portfolio'}
-                               render={() => <BrokerDashboard/>}/>
+                               render={() => <BrokerClientDashboard/>}/>
                         <Route path={'/search/:criteria'}
                                exact
                                component={Search}/>
