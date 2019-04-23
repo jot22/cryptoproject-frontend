@@ -1,13 +1,18 @@
 import React from 'react';
 import './Details.css';
 import CoinMarketService from "../services/CoinMarketService";
+import InvestorService from "../services/InvestorService";
+import UserService from "../services/UserService";
 
 export default class Details extends React.Component {
     constructor(props) {
         super(props);
         this.coinMarketService = CoinMarketService.getInstance();
+        this.userService = UserService.getInstance();
+        this.investorService = InvestorService.getInstance();
         this.symbol = props.match.params.symbol;
         this.state = {
+            user: {},
             shares: '',
             crypto: {
                 data: {}
@@ -28,6 +33,11 @@ export default class Details extends React.Component {
     }
 
     componentDidMount() {
+        this.userService.profile().then(
+            user => {
+                this.setState({user: user});
+            }
+        );
         this.coinMarketService.findCryptoBySymbol(this.symbol)
             .then(crypto => {
                 this.setState({
@@ -44,8 +54,18 @@ export default class Details extends React.Component {
         );
     };
 
-    investAsInvestor = () => {
-        console.log(this.state.shares)
+    invest = () => {
+        var trade = {
+            tokens: parseInt(this.state.shares),
+            priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
+            sold: false,
+            status: "PENDING",
+        }
+        var user = this.state.user;
+        if (user.type === 'INVESTOR') {
+            this.investorService.requestTrade(user._id, user.broker, "5cbdc9b236e23d6b581fb43e", trade)
+                .then(response => console.log(response))
+        }
     };
 
     displayCorrectBox = () => {
@@ -55,21 +75,27 @@ export default class Details extends React.Component {
             case "INVESTOR":
                 buffer.push(
                     <div className="btn-group" role="group" id={"investorBox"}>
-                        <input type="text" className="form-control" placeholder="# of Shares"/>
-                        <button type="button" className="btn btn-success btn-block">Request Shares</button>
+                        <input type="text" className="form-control" placeholder="# of Shares"
+                               onChange={this.sharesInputChanged}/>
+                        <button type="button" className="btn btn-success btn-block"
+                                onClick={this.invest}>Request Shares
+                        </button>
                     </div>
                 );
                 break;
             case "BROKER":
                 buffer.push(
                     <div className="btn-group" role="group">
-                        <input type="text" className="form-control" placeholder="# of Shares"/>
+                        <input type="text" className="form-control" placeholder="# of Shares"
+                               onChange={this.sharesInputChanged}/>
                         <select className={'form-control'}>
                             <option>
                                 Client List
                             </option>
                         </select>
-                        <button type="button" className="btn btn-success btn-block">Invest</button>
+                        <button type="button" className="btn btn-success btn-block"
+                                onClick={this.invest}>Invest
+                        </button>
                     </div>
                 );
                 break;
