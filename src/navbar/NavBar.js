@@ -86,6 +86,7 @@ export default class NavBar extends React.Component {
             buffer.push(
                 <div id={"buttonDivider"}/>
             );
+            if(this.state.user.type === 'INVESTOR'){
             buffer.push(
                 <Link to={'/portfolio'}>
                     <button type={'button'}
@@ -95,6 +96,18 @@ export default class NavBar extends React.Component {
                     </button>
                 </Link>
             )
+            }
+            else{
+                buffer.push(
+                    <Link to={'/brokerPortfolio'}>
+                        <button type={'button'}
+                                id={"portfolioButton"}
+                                className={'btn btn-primary'}>
+                            Portfolios
+                        </button>
+                    </Link>
+                )
+            }
         } else {
             buffer.push(
                 <Link to={'/register'}>
@@ -211,6 +224,8 @@ export default class NavBar extends React.Component {
                                component={Details}/>
                         <Route path={'/portfolio'}
                                render={() => <BrokerClientDashboard/>}/>
+                        <Route path={'/brokerPortfolio'}
+                               render={() => <BrokerDashboard/>}/>
                         <Route path={'/search/:criteria'}
                                exact
                                component={Search}/>
