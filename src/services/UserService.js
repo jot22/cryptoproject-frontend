@@ -13,7 +13,7 @@ export default class UserService {
     }
 
     findAllUsers = () =>
-        fetch(USER_API_URL+ "user", {
+        fetch(USER_API_URL + "user", {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -33,10 +33,11 @@ export default class UserService {
 
 
     logout = () => {
-        fetch(USER_API_URL + "logout", {
-            method: 'POST',
+        return fetch(USER_API_URL + "logout", {
+            credentials: 'include',
+            method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'content-type': 'application/json'
             }
         }).then(response =>
             response.json());
@@ -44,13 +45,11 @@ export default class UserService {
 
     profile = () => {
         return fetch(USER_API_URL + "profile", {
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json())
-            .catch(err => {
-                console.log(err)
-            });
+        }).then(response => response.json());
     }
 
     updateProfile = (user) => {
@@ -59,20 +58,23 @@ export default class UserService {
             method: 'put',
             body: JSON.stringify(user),
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             }
-        }).then(response =>
-                response.json());
-    }
-
-    register = (user) => {
-        return fetch(USER_API_URL + "register", {
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST'
         }).then(response =>
             response.json());
     }
+
+    register = (user) => {
+
+        return fetch(USER_API_URL + "register", {
+            credentials: 'include',
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response =>
+            response.json());
+    }
+
 }
