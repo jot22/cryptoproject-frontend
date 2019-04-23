@@ -68,10 +68,10 @@ export default class NavBar extends React.Component {
     loadButtonsLoggedInNot = () => {
         let buffer = [];
         let loggedIn = true;
-        if (loggedIn) {
+        if (this.state.user.type !== 'GUEST') {
             buffer.push(
                 <Link to={'/profile'} id={"customerDetail"}>
-                    Smith, John
+                    {this.state.user.lastName}, {this.state.user.firstName}
                 </Link>
             );
             buffer.push(
@@ -152,6 +152,10 @@ export default class NavBar extends React.Component {
         this.userService.logout().then(response => console.log(response))
     }
 
+    setUser = (user) => {
+        this.setState({user: user})
+    }
+
     render() {
         return (
             <Router>
@@ -192,7 +196,8 @@ export default class NavBar extends React.Component {
                                exact
                                component={HomePage}/>
                         <Route path="/login" exact
-                               render={() => <Login/>}/>
+                               render={() => <Login
+                                   setUser={this.setUser}/>}/>
                         <Route path="/register" exact
                                render={() => <Register/>}/>
                         <Route path="/profile" exact

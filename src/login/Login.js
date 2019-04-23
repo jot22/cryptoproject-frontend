@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css'
 import UserService from "../services/UserService";
 //import {Link} from "react-router-dom";
-//import {Redirect} from 'react-router';
+import {Redirect} from 'react-router-dom';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -29,13 +29,17 @@ export default class Login extends React.Component {
             password: this.state.passwordField
         };
         this.userService.login(makeJSON)
-            .then(response => console.log(response))
+            .then(response => {
+                if (response) {
+                    this.props.setUser(response);
+                    this.setState({backHome: true})
+                }
+            })
     }
-
 
     render() {
         if (this.state.backHome === true) {
-            //return <Redirect to='/'/>
+            return <Redirect to='/'/>
         }
         return (
             <div id={"loginContainer"}>
