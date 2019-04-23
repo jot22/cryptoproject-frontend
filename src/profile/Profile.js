@@ -1,7 +1,7 @@
 import React from 'react'
 import './Profile.css'
 import UserService from '../services/UserService';
-import { Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -9,6 +9,7 @@ export default class Profile extends React.Component {
         this.userService = UserService.getInstance();
         this.state = {
             user: {},
+            brokers: [],
             phoneFld: '',
             emailFld: '',
             roleFld: '',
@@ -20,10 +21,14 @@ export default class Profile extends React.Component {
             renderSuc: false
         }
     }
+
     componentDidMount() {
         this.getProfile();
-        console.log(this.state.user);
+        this.userService.findAllUsers().then(users => {
+            this.setState({brokers: users.filter(user => user.type === 'BROKER')})
+        })
     }
+
     updateFirstName = (event) => {
         let newUser = this.state.user;
         newUser.firstName = event.target.value;
@@ -61,6 +66,16 @@ export default class Profile extends React.Component {
         })
     }
 
+    updateBroker = (event) => {
+        let newUser = this.state.user;
+        newUser.broker = event.target.value;
+        this.setState(
+            {
+                user: newUser
+            }
+        )
+    }
+
     getProfile = () => {
         this.userService.profile().then(response => {
             console.log(response);
@@ -73,7 +88,7 @@ export default class Profile extends React.Component {
     updateProfile = () => {
         console.log(this.state.firstName);
         this.userService.updateUser(this.state.user._id, this.state.user).then(response => {
-            console.log(response);
+                console.log(response);
             }
         )
     }
@@ -161,7 +176,6 @@ export default class Profile extends React.Component {
                     <form>
 
 
-
                         <div className="form-group row">
                             <label form="firstName"
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>First Name</label>
@@ -210,9 +224,24 @@ export default class Profile extends React.Component {
                             <label form="email"
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>Managed By</label>
                             <div className="col-sm-7">
-                                <input className="form-control" id="email"
-                                       placeholder={this.state.user.broker}
-                                       defaultValue={"Sir Scamalot"} />
+                                <select className="form-control" id="email"
+                                        value={this.state.user.broker}
+                                        readOnly={(this.state.user.broker != null)}
+                                        onChange={this.updateBroker}>
+                                    <option>
+                                        Select a Broker
+                                    </option>
+                                    {
+                                        this.state.brokers.map(broker => {
+                                                return (
+                                                    <option value={broker._id}>
+                                                        {broker.firstName} {broker.lastName}
+                                                    </option>
+                                                )
+                                            }
+                                        )
+                                    }
+                                </select>
                             </div>
                         </div>
 
@@ -232,16 +261,17 @@ export default class Profile extends React.Component {
                         <div className="form-group row">
                             <label className="col-sm-5 col-form-label" id={"usernameLabel"}/>
                             <div className="col-sm-7">
-                                <a  style={{textDecoration: 'none'}}>
-                                    <button type={"button"} onClick={this.updateProfile} className={"btn btn-success btn-block"}>
+                                <a style={{textDecoration: 'none'}}>
+                                    <button type={"button"} onClick={this.updateProfile}
+                                            className={"btn btn-success btn-block"}>
                                         Update
                                     </button>
                                 </a>
                                 <a href={""} style={{textDecoration: 'none'}}>
                                     <Link to={'/'}>
-                                    <button type={"button"} className={"btn btn-warning btn-block"}>
-                                        Back Home
-                                    </button>
+                                        <button type={"button"} className={"btn btn-warning btn-block"}>
+                                            Back Home
+                                        </button>
                                     </Link>
                                 </a>
                             </div>
