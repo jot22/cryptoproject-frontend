@@ -8,14 +8,13 @@ import Profile from "../profile/Profile";
 import Api from "../api-content/ApiContent";
 import Footer from "../footer/Footer";
 import Details from '../details/Details';
-import Portfolio from "../portfolio/Portfolio";
 import Search from "../search/Search";
-import UserService from "../services/UserService";
+import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
+import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
-        this.userService = UserService.getInstance();
         this.topTicker = React.createRef();
         this.state = {
             searchInput: ""
@@ -137,29 +136,6 @@ export default class NavBar extends React.Component {
         );
     };
 
-    reRegister = () => {
-        this.userService.register({
-                username: 'jt',
-                password: 't',
-                firstName: '',
-                lastName: '',
-                type: "INVESTOR",
-                wallet: 0
-            }
-        ).then(response => console.log(response))
-    };
-
-    logout = () => {
-        this.userService.logout()
-            .then(response => console.log(response))
-    }
-
-
-    getProfile = () => {
-        this.userService.profile()
-            .then(response => console.log(response))
-    }
-
     render() {
         return (
             <Router>
@@ -174,15 +150,6 @@ export default class NavBar extends React.Component {
                             <label className="navbar-brand " id={"apiHooks"}>
                                 <Link to="/api" className='disabled-link'>API Calls</Link>
                             </label>
-                            <button onClick={this.reRegister}>
-                                Register
-                            </button>
-                            <button onClick={this.logout}>
-                                Logout
-                            </button>
-                            <button onClick={this.getProfile}>
-                                Profile
-                            </button>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
@@ -214,7 +181,7 @@ export default class NavBar extends React.Component {
                                exact
                                component={Details}/>
                         <Route path={'/portfolio'}
-                               render={() => <Portfolio/>}/>
+                               render={() => <BrokerClientDashboard/>}/>
                         <Route path={'/search/:criteria'}
                                exact
                                component={Search}/>

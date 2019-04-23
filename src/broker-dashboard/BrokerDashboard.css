@@ -1,0 +1,41 @@
+#mainBrokerDashContainer {
+    background-color: darkslategray;
+    padding: 10px 35px 20px;
+}
+
+#brokerHeader {
+    color: white;
+    font-size: 3.7em;
+    font-family: Consolas, serif;
+    font-weight: 900;
+    border-bottom: 3px solid red;
+    max-width: 535px;
+}
+
+
+#tableHead {
+    background-color: #EFEFEF;
+    font-family: Consolas, serif;
+    font-size: 1.2em;
+
+
+}
+
+#tableRows:hover td {
+    background: whitesmoke;
+}
+
+#tableRows {
+    background-color: white;
+    font-family: Consolas, serif;
+    font-size: 1.05em;
+}
+
+#tableBodyPort {
+    filter: drop-shadow(0px 6px 5px black);
+}
+
+#addClientButton {
+    max-width: 140px;
+    min-width: 110px;
+}
