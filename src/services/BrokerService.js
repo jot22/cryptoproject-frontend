@@ -33,4 +33,16 @@ export default class BrokerService {
             response.json());
     }
 
+    deleteTrade = (tradeId, trade) => {
+        return fetch(INVEST_API_URL + 'trade/' + tradeId, {
+                method: 'delete',
+                body: JSON.stringify(trade),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }
+        )
+            .then(response => response.json());
+    }
+
 }

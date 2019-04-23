@@ -31,11 +31,28 @@ export default class BrokerClientDashboard extends Component {
         )
     }
 
+    findAllTrades = () => {
+        this.investorService.findTradeByInvestor(this.state.user._id)
+            .then(trades =>
+                this.setState(
+                    {
+                        investments: trades
+                    }
+                ))
+    }
+
     sellTrade = (trade) => {
         trade.sold = true;
         console.log(trade)
         // this.brokerService.updateTrade(trade._id, trade)
         //     .then(response => console.log(response));
+    }
+
+    cancelTrade = (trade) => {
+        console.log(trade)
+        this.brokerService.deleteTrade(trade._id, trade).then(
+            response => this.findAllTrades()
+        )
     }
 
 
@@ -110,7 +127,7 @@ export default class BrokerClientDashboard extends Component {
                                                     <button type="button"
                                                             className={"btn btn-danger " +
                                                             ((investment.status === 'PROCESSED') ? 'd-none' : "")}
-                                                            onClick={() => this.sellTrade(investment)}>
+                                                            onClick={() => this.cancelTrade(investment)}>
                                                         Cancel
                                                     </button>
                                                     <button type="button"
