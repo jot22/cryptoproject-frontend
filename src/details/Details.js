@@ -45,12 +45,13 @@ export default class Details extends React.Component {
                 }
             }
         );
-        // this.coinMarketService.findCryptoBySymbol(this.symbol)
-        //     .then(crypto => {
-        //         this.setState({
-        //             crypto: crypto
-        //         })
-        //     });
+        this.coinMarketService.findCryptoBySymbol(this.symbol)
+            .then(crypto => {
+                console.log(crypto)
+                this.setState({
+                    crypto: crypto
+                })
+            });
     }
 
     sharesInputChanged = (event) => {
@@ -72,13 +73,12 @@ export default class Details extends React.Component {
     request = () => {
         var trade = {
             tokens: parseInt(this.state.shares),
-            priceWhenBought: 6000,
-            // priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
+            priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
             sold: false,
             status: "PENDING",
         };
         var user = this.state.user;
-        this.investorService.requestTrade(user._id, user.broker, "5cbdc9b236e23d6b581fb43e", trade)
+        this.investorService.requestTrade(user._id, user.broker, this.state.crypto.data[this.symbol].id, trade)
             .then(response => console.log(response))
     };
 
@@ -93,7 +93,7 @@ export default class Details extends React.Component {
             status: "PROCESSED",
         };
         this.investorService.requestTrade(this.state.client, this.state.user._id,
-            "5cbdc9b236e23d6b581fb43e", trade)
+            this.state.crypto.data[this.symbol].id, trade)
             .then(response => console.log(response))
     }
 
