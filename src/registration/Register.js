@@ -2,7 +2,7 @@ import React from 'react'
 import './Register.css'
 import UserService from "../services/UserService";
 //import {Link} from "react-router-dom";
-//import {Redirect} from "react-router";
+import {Redirect} from "react-router-dom";
 
 
 export default class Register extends React.Component {
@@ -110,7 +110,10 @@ export default class Register extends React.Component {
         };
 
         this.userService.register(makeJSON).then((target) => {
-            this.checkLogin(target)
+            if (target) {
+                this.props.setUser(target);
+                this.setState({backHome: true})
+            }
         });
     }
 
@@ -122,105 +125,107 @@ export default class Register extends React.Component {
 
     render() {
         if (this.state.backHome === true) {
-           // return <Redirect to='/'/>
+            return <Redirect to='/'/>
         }
         return (
             <div id={"registerContainer"}>
-            <div id="mainContainer" className="container">
-                <div className="col-sm-10">
-                    <h1 id={"registerText"}>Register</h1>
-                </div>
-                <form>
-                    <div className="form-group row">
-                        <label htmlFor="username" className="col-sm-5 col-form-label"
-                               id={"usernameLabel"}>Username </label>
-                        <div className="col-sm-7">
-                            <input className="form-control" id="username"
-                                   placeholder="Username" onChange={(event) => this.setUserName(event.target.value)}/>
-                        </div>
+                <div id="mainContainer" className="container">
+                    <div className="col-sm-10">
+                        <h1 id={"registerText"}>Register</h1>
                     </div>
-
-                    <div className="form-group row">
-                        <label htmlFor="password" className="col-sm-5 col-form-label"
-                               id={"usernameLabel"}>Password</label>
-
-                        <div className="col-sm-7">
-                            <input className="form-control" id="password"
-                                   type={"password"}
-                                   style={{backgroundColor: this.state.backgroundColPassField}}
-                                   placeholder="123qwe#$%" onChange={(event) => this.setPassField(event.target.value)}/>
+                    <form>
+                        <div className="form-group row">
+                            <label htmlFor="username" className="col-sm-5 col-form-label"
+                                   id={"usernameLabel"}>Username </label>
+                            <div className="col-sm-7">
+                                <input className="form-control" id="username"
+                                       placeholder="Username"
+                                       onChange={(event) => this.setUserName(event.target.value)}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="verify-password" className="col-sm-5 col-form-label" id={"usernameLabel"}>Verify
-                            Password</label>
-                        <div className="col-sm-7">
-                            <input className="form-control" id="password"
-                                   placeholder="Enter Your Password Again"
-                                   type={"password"}
-                                   style={{backgroundColor: this.state.backgroundColPassVerifyField}}
-                                   onChange={(event) => this.setVerifyField(event.target.value)}/>
+                        <div className="form-group row">
+                            <label htmlFor="password" className="col-sm-5 col-form-label"
+                                   id={"usernameLabel"}>Password</label>
+
+                            <div className="col-sm-7">
+                                <input className="form-control" id="password"
+                                       type={"password"}
+                                       style={{backgroundColor: this.state.backgroundColPassField}}
+                                       placeholder="123qwe#$%"
+                                       onChange={(event) => this.setPassField(event.target.value)}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="password" className="col-sm-5 col-form-label" id={"usernameLabel"}>First
-                            Name</label>
-                        <div className="col-sm-7">
-                            <input className="form-control" id="password"
-                                   placeholder="123qwe#$%"
-                                   onChange={(event) => this.setFirstNameField(event.target.value)}/>
+                        <div className="form-group row">
+                            <label htmlFor="verify-password" className="col-sm-5 col-form-label" id={"usernameLabel"}>Verify
+                                Password</label>
+                            <div className="col-sm-7">
+                                <input className="form-control" id="password"
+                                       placeholder="Enter Your Password Again"
+                                       type={"password"}
+                                       style={{backgroundColor: this.state.backgroundColPassVerifyField}}
+                                       onChange={(event) => this.setVerifyField(event.target.value)}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="password" className="col-sm-5 col-form-label" id={"usernameLabel"}>Last
-                            Name</label>
-                        <div className="col-sm-7">
-                            <input className="form-control" id="password"
-                                   placeholder="123qwe#$%"
-                                   onChange={(event) => this.setLastNameField(event.target.value)}/>
+                        <div className="form-group row">
+                            <label htmlFor="password" className="col-sm-5 col-form-label" id={"usernameLabel"}>First
+                                Name</label>
+                            <div className="col-sm-7">
+                                <input className="form-control" id="password"
+                                       placeholder="123qwe#$%"
+                                       onChange={(event) => this.setFirstNameField(event.target.value)}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
 
-                        <label htmlFor="widgetSelectHeading" className="col-sm-5 col-form-label"
-                               id={"usernameLabel"}>Role</label>
-
-                        <div className="col-sm-7">
-                            <select className="custom-select"
-                                    id="widgetSelectHeading"
-                                    value={this.state.role}
-                                    onChange={(event) => this.setRoleField(event.target.value)}>
-                                <option value={"INVESTOR"}>Investor</option>
-                                <option value={"BROKER"}>Broker</option>
-                            </select>
+                        <div className="form-group row">
+                            <label htmlFor="password" className="col-sm-5 col-form-label" id={"usernameLabel"}>Last
+                                Name</label>
+                            <div className="col-sm-7">
+                                <input className="form-control" id="password"
+                                       placeholder="123qwe#$%"
+                                       onChange={(event) => this.setLastNameField(event.target.value)}/>
+                            </div>
                         </div>
-                    </div>
+                        <div className="form-group row">
 
-                    <div className="form-group row">
-                        <div className={"col-sm-5"}/>
-                        <div className="col-sm-7 float-right">
-                            <button type={"button"} className="btn btn-success btn-block"
-                                    onClick={() => this.handleRegister()}>Sign Up
-                            </button>
-                            <div className="row">
-                                <div className="col-6">
-                                    <a href={""} id={"registerLink"}>
-                                        Sign In
-                                    </a>
-                                </div>
-                                <div className="col-6">
-                                    <a href={""} className={"float-right"} id={"registerLink"}>
-                                        Back Home
-                                    </a>
+                            <label htmlFor="widgetSelectHeading" className="col-sm-5 col-form-label"
+                                   id={"usernameLabel"}>Role</label>
+
+                            <div className="col-sm-7">
+                                <select className="custom-select"
+                                        id="widgetSelectHeading"
+                                        value={this.state.role}
+                                        onChange={(event) => this.setRoleField(event.target.value)}>
+                                    <option value={"INVESTOR"}>Investor</option>
+                                    <option value={"BROKER"}>Broker</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group row">
+                            <div className={"col-sm-5"}/>
+                            <div className="col-sm-7 float-right">
+                                <button type={"button"} className="btn btn-success btn-block"
+                                        onClick={() => this.handleRegister()}>Sign Up
+                                </button>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <a href={""} id={"registerLink"}>
+                                            Sign In
+                                        </a>
+                                    </div>
+                                    <div className="col-6">
+                                        <a href={""} className={"float-right"} id={"registerLink"}>
+                                            Back Home
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         )
     }

@@ -149,7 +149,8 @@ export default class NavBar extends React.Component {
     }
 
     logout = () => {
-        this.userService.logout().then(response => console.log(response))
+        this.userService.logout().then(response =>
+            this.setState({user: {type: 'GUEST'}}))
     }
 
     setUser = (user) => {
@@ -199,7 +200,8 @@ export default class NavBar extends React.Component {
                                render={() => <Login
                                    setUser={this.setUser}/>}/>
                         <Route path="/register" exact
-                               render={() => <Register/>}/>
+                               render={() => <Register
+                                   setUser={this.setUser}/>}/>
                         <Route path="/profile" exact
                                render={() => <Profile/>}/>
                         <Route path="/api" exact
