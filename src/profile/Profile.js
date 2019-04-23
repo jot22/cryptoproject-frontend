@@ -267,13 +267,11 @@ export default class Profile extends React.Component {
                                         Update
                                     </button>
                                 </a>
-                                <a href={""} style={{textDecoration: 'none'}}>
-                                    <Link to={'/'}>
-                                        <button type={"button"} className={"btn btn-warning btn-block"}>
-                                            Back Home
-                                        </button>
-                                    </Link>
-                                </a>
+                                <Link to={'/'}>
+                                    <button type={"button"} className={"btn btn-warning btn-block"}>
+                                        Back Home
+                                    </button>
+                                </Link>
                             </div>
                         </div>
 
