@@ -49,7 +49,11 @@ export default class UserService {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json());
+        })
+            .then(response => response.json())
+            .catch(err => {
+                return {type: 'GUEST'}
+            });
     }
 
     updateProfile = (user) => {
