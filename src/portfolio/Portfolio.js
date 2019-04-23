@@ -7,6 +7,7 @@ export default class Portfolio extends Component {
         super(props);
         this.userService = UserService.getInstance();
         this.state = {
+            user: {},
             investments: [
                 {
                     name: 'Bitcoin',
@@ -28,7 +29,9 @@ export default class Portfolio extends Component {
 
     componentDidMount() {
         this.userService.profile().then(
-            response => console.log(response)
+            user => {
+                this.setState({user: user})
+            }
         );
     }
 
