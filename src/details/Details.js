@@ -39,6 +39,7 @@ export default class Details extends React.Component {
             user => {
                 if (user.type === 'BROKER') {
                     this.setState({
+                        user: user,
                         clients: user.clients
                     })
                 } else {
