@@ -134,18 +134,14 @@ export default class NavBar extends React.Component {
     };
 
     properRole = () => {
-        let role = 2;
-        switch (role) {
-            case 1:
-                return "Guest";
-            case 2:
-                return "Member";
-            case 3:
+        switch (this.state.user.type) {
+            case "BROKER":
                 return "Broker";
+            case "INVESTOR":
+                return "Investor";
             default:
                 return "Guest";
         }
-
     };
 
     searchInputChanged = (event) => {
@@ -158,16 +154,16 @@ export default class NavBar extends React.Component {
 
     getProfile = () => {
         this.userService.profile().then(response => console.log(response))
-    }
+    };
 
     logout = () => {
         this.userService.logout().then(response =>
             this.setState({user: {type: 'GUEST'}}))
-    }
+    };
 
     setUser = (user) => {
         this.setState({user: user})
-    }
+    };
 
     render() {
         return (
@@ -177,7 +173,7 @@ export default class NavBar extends React.Component {
                         <div id={"tickerBox"} ref={this.topTicker}/>
                         <nav className="navbar navbar-dark bg-dark justify-content-between">
                             <label className="navbar-brand">
-                                <Link to="/" id={"websiteName"}>Creepo Investing | {this.properRole()}</Link>
+                                <Link to="/" id={"websiteName"}>Piggybank Investing | {this.properRole()}</Link>
                             </label>
 
                             <label className="navbar-brand " id={"apiHooks"}>

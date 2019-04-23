@@ -12,6 +12,7 @@ import TradingViewWidget from 'react-tradingview-widget';
 export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             ticker: 'COINBASE:BTCUSD'
         }

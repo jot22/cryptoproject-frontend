@@ -15,10 +15,10 @@ export default class HomePage extends React.Component {
             <div id={"footer"}>
 
                 <label>
-                    Copyright Creepo Investment Inc. 2019 - All Rights Reserved, Established 2019.
+                    Copyright Piggybank Investment Inc. 2019 - All Rights Reserved, Established 2019.
                 </label>
                 <p>About:
-                    Welcome to Creepo Investment Inc, where we take care of all your most delicate financial needs.
+                    Welcome to Piggybank Investment Inc, where we take care of all your most delicate financial needs.
                 </p>
             </div>
         )
