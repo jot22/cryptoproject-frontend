@@ -1,11 +1,13 @@
 import React from 'react'
 import './Profile.css'
+import UserService from '../services/UserService';
 
 export default class Profile extends React.Component {
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
         this.state = {
-            user: '',
+            user: {},
             phoneFld: '',
             emailFld: '',
             roleFld: '',
@@ -13,9 +15,68 @@ export default class Profile extends React.Component {
             firstName: '',
             lastName: '',
             wholeUser: [],
+            wallet: 0,
             renderSuc: false
         }
     }
+    componentDidMount() {
+        this.getProfile();
+        console.log(this.state.user);
+    }
+    updateFirstName = (event) => {
+        let newUser = this.state.user;
+        newUser.firstName = event.target.value;
+        this.setState({
+            user: newUser
+        })
+    }
+
+    updateLastName = (event) => {
+        let newUser = this.state.user;
+        newUser.lastName = event.target.value;
+        this.setState({
+            lastName: newUser
+        })
+    }
+    updatePhone = (event) => {
+        let newUser = this.state.user;
+        newUser.phone = event.target.value;
+        this.setState({
+            phoneFld: newUser
+        })
+    }
+    updateEmail = (event) => {
+        let newUser = this.state.user;
+        newUser.email = event.target.value;
+        this.setState({
+            emailFld: newUser
+        })
+    }
+    updateWallet = (event) => {
+        let newUser = this.state.user;
+        newUser.wallet = event.target.value;
+        this.setState({
+            wallet: newUser
+        })
+    }
+
+    getProfile = () => {
+        this.userService.profile().then(response => {
+            console.log(response);
+            this.setState({
+                user: response,
+            })
+        })
+    }
+
+    updateProfile = () => {
+        console.log(this.state.firstName);
+        this.userService.updateUser(this.state.user._id, this.state.user).then(response => {
+            console.log(response);
+            }
+        )
+    }
+
 
     // submitProfileChange() {
     //     let formatJSON = {
@@ -95,8 +156,9 @@ export default class Profile extends React.Component {
         return (
             <div id={"bigProfileContain"}>
                 <div id="mainContainer" className="container">
-                    <h1 id={"registerText"}>{/*this.state.user.username*/}Hello, Alice</h1>
+                    <h1 id={"registerText"}>{/*this.state.user.username*/}Hello, {this.state.user.username}</h1>
                     <form>
+
 
 
                         <div className="form-group row">
@@ -104,7 +166,9 @@ export default class Profile extends React.Component {
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>First Name</label>
                             <div className="col-sm-7">
                                 <input className="form-control" id="telephone"
-                                       value={"John"} readOnly={true}/>
+                                       onChange={this.updateFirstName}
+                                       defaultValue={this.state.user.firstName}
+                                       placeholder={"Dunkin"} readOnly={false}/>
                             </div>
                         </div>
 
@@ -113,7 +177,9 @@ export default class Profile extends React.Component {
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>Last Name</label>
                             <div className="col-sm-7">
                                 <input className="form-control" id="telephone"
-                                       value={"Smith"} readOnly={true}/>
+                                       onChange={this.updateLastName}
+                                       defaultValue={this.state.user.lastName}
+                                       placeholder={"Donuts"} readOnly={false}/>
                             </div>
                         </div>
 
@@ -122,8 +188,9 @@ export default class Profile extends React.Component {
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>Phone</label>
                             <div className="col-sm-7">
                                 <input className="form-control" id="telephone"
-
-                                       value={"555-555-5555"} readOnly={true}/>
+                                       onChange={this.updatePhone}
+                                       defaultValue={this.state.user.phone}
+                                       placeholder={"555-555-5555"} readOnly={false}/>
                             </div>
                         </div>
 
@@ -132,8 +199,9 @@ export default class Profile extends React.Component {
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>Email</label>
                             <div className="col-sm-7">
                                 <input className="form-control" id="email"
-                                       placeholder={this.state.user.email}
-                                       value={"this.state.emailFld"} readOnly={true}/>
+                                       onChange={this.updateEmail}
+                                       defaultValue={this.state.user.email}
+                                       placeholder={"google@gmail.com"}/>
                             </div>
                         </div>
 
@@ -142,20 +210,20 @@ export default class Profile extends React.Component {
                                    className="col-sm-5 col-form-label" id={"usernameLabel"}>Managed By</label>
                             <div className="col-sm-7">
                                 <input className="form-control" id="email"
-                                       placeholder={this.state.user.email}
-                                       value={"Sir Scamalot"} readOnly={true}/>
+                                       placeholder={this.state.user.broker}
+                                       defaultValue={"Sir Scamalot"} />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label form="dob"
-                                   className="col-sm-5 col-form-label" id={"usernameLabel"}>DOB</label>
+                                   className="col-sm-5 col-form-label" id={"usernameLabel"}>Wallet</label>
                             <div className="col-sm-7">
-                                <input type="date"
+                                <input type="email"
                                        className="form-control" id="dob"
-                                       defaultValue={this.state.user.dob}
-                                    //value={this.state.user.dob}
-                                       readOnly={true}/>
+                                       onChange={this.updateWallet}
+                                       placeholder={9001}
+                                       defaultValue={this.state.user.wallet}/>
                             </div>
                         </div>
 
@@ -163,6 +231,11 @@ export default class Profile extends React.Component {
                         <div className="form-group row">
                             <label className="col-sm-5 col-form-label" id={"usernameLabel"}/>
                             <div className="col-sm-7">
+                                <a  style={{textDecoration: 'none'}}>
+                                    <button type={"button"} onClick={this.updateProfile} className={"btn btn-success btn-block"}>
+                                        Update
+                                    </button>
+                                </a>
                                 <a href={""} style={{textDecoration: 'none'}}>
                                     <button type={"button"} className={"btn btn-warning btn-block"}>
                                         Back Home
