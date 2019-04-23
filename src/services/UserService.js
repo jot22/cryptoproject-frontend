@@ -58,6 +58,7 @@ export default class UserService {
     }
 
     updateUser = (userId, user) => {
+        console.log(userId);
         return fetch(USER_API_URL + "user/" + userId, {
             credentials: "include",
             method: 'put',
