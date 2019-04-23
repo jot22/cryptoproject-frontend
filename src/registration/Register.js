@@ -1,5 +1,6 @@
 import React from 'react'
 import './Register.css'
+import UserService from "../services/UserService";
 //import {Link} from "react-router-dom";
 //import {Redirect} from "react-router";
 
@@ -9,6 +10,7 @@ export default class Register extends React.Component {
 
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
         this.state = {
             userNameField: '',
             passwordField: '',
@@ -17,7 +19,7 @@ export default class Register extends React.Component {
             lastName: '',
             backgroundColPassField: "white",
             backgroundColPassVerifyField: "white",
-            role: 'FACULTY',
+            role: 'INVESTOR',
             backHome: false
         };
     }
@@ -101,17 +103,15 @@ export default class Register extends React.Component {
             password: this.state.passwordField,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            id: 2,
             role: this.state.role,
             dob: null,
             email: null,
             phone: null
         };
 
-        // let newUserService = new UserServiceJava();
-        // newUserService.register(makeJSON).then((target) => {
-        //     this.checkLogin(target)
-        // });
+        this.userService.register(makeJSON).then((target) => {
+            this.checkLogin(target)
+        });
     }
 
     checkLogin(target) {
@@ -191,10 +191,10 @@ export default class Register extends React.Component {
                         <div className="col-sm-7">
                             <select className="custom-select"
                                     id="widgetSelectHeading"
+                                    value={this.state.role}
                                     onChange={(event) => this.setRoleField(event.target.value)}>
-                                <option value={"FACULTY"}>Faculty</option>
-                                <option value={"STUDENT"}>Student</option>
-                                <option value={"ADMIN"}>Admin</option>
+                                <option value={"INVESTOR"}>Investor</option>
+                                <option value={"BROKER"}>Broker</option>
                             </select>
                         </div>
                     </div>

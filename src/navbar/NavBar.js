@@ -144,6 +144,14 @@ export default class NavBar extends React.Component {
         );
     };
 
+    getProfile = () => {
+        this.userService.profile().then(response => console.log(response))
+    }
+
+    logout = () => {
+        this.userService.logout().then(response => console.log(response))
+    }
+
     render() {
         return (
             <Router>
@@ -158,6 +166,12 @@ export default class NavBar extends React.Component {
                             <label className="navbar-brand " id={"apiHooks"}>
                                 <Link to="/api" className='disabled-link'>API Calls</Link>
                             </label>
+                            <button onClick={this.getProfile}>
+                                Profile
+                            </button>
+                            <button onClick={this.logout}>
+                                Logout
+                            </button>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"

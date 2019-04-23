@@ -22,13 +22,15 @@ export default class UserService {
 
     login = (user) => {
         return fetch(USER_API_URL + "login", {
+            credentials: 'include',
+            method: 'post',
             body: JSON.stringify(user),
             headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST'
+                'content-Type': 'application/json'
+            }
         }).then(response =>
-            response.json()).catch(() => alert("Wrong username/password combination"));
+            response.json())
+            .catch(() => alert("Wrong username/password combination"));
     }
 
 
