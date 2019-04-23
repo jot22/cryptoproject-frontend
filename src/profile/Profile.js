@@ -1,6 +1,7 @@
 import React from 'react'
 import './Profile.css'
 import UserService from '../services/UserService';
+import { Link} from 'react-router-dom';
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -237,9 +238,11 @@ export default class Profile extends React.Component {
                                     </button>
                                 </a>
                                 <a href={""} style={{textDecoration: 'none'}}>
+                                    <Link to={'/'}>
                                     <button type={"button"} className={"btn btn-warning btn-block"}>
                                         Back Home
                                     </button>
+                                    </Link>
                                 </a>
                             </div>
                         </div>
