@@ -8,8 +8,8 @@ import Profile from "../profile/Profile";
 import Api from "../api-content/ApiContent";
 import Footer from "../footer/Footer";
 import Details from '../details/Details';
-import Portfolio from "../portfolio/Portfolio";
 import Search from "../search/Search";
+import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -180,7 +180,7 @@ export default class NavBar extends React.Component {
                                exact
                                component={Details}/>
                         <Route path={'/portfolio'}
-                               render={() => <Portfolio/>}/>
+                               render={() => <BrokerDashboard/>}/>
                         <Route path={'/search/:criteria'}
                                exact
                                component={Search}/>
