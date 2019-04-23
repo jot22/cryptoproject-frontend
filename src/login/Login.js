@@ -1,7 +1,7 @@
 import React from 'react'
 import './Login.css'
 import UserService from "../services/UserService";
-//import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Redirect} from 'react-router-dom';
 
 export default class Login extends React.Component {
@@ -76,10 +76,10 @@ export default class Login extends React.Component {
                                 </button>
                                 <div className="row">
                                     <div className="col-6">
-                                        <a href={"/register"} id={"registerLink"}>New User? Register</a>
+                                        <Link to={'/register'} id={"registerLink"}>New User? Register</Link>
                                     </div>
                                     <div className="col-6">
-                                        <a href={"/"} id={"homeLink"}>Back Home</a>
+                                        <Link to={'/'} id={"homeLink"}>Back Home</Link>
                                     </div>
                                 </div>
                             </div>

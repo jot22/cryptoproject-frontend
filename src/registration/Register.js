@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 import UserService from "../services/UserService";
-//import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
 
 
@@ -212,14 +212,14 @@ export default class Register extends React.Component {
                                 </button>
                                 <div className="row">
                                     <div className="col-6">
-                                        <a href={"/login"} id={"registerLink"}>
+                                        <Link to={'/login'} id={"registerLink"}>
                                             Sign In
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="col-6">
-                                        <a href={"/"} className={"float-right"} id={"registerLink"}>
+                                        <Link to={'/'} className={"float-right"} id={"registerLink"}>
                                             Back Home
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
