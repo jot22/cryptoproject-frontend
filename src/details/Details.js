@@ -12,6 +12,8 @@ export default class Details extends React.Component {
         this.investorService = InvestorService.getInstance();
         this.symbol = props.match.params.symbol;
         this.state = {
+            clients: [],
+            client: null,
             user: {},
             shares: '',
             crypto: {
@@ -35,15 +37,21 @@ export default class Details extends React.Component {
     componentDidMount() {
         this.userService.profile().then(
             user => {
-                this.setState({user: user});
+                if (user.type === 'BROKER') {
+                    this.setState({
+                        clients: user.clients
+                    })
+                } else {
+                    this.setState({user: user});
+                }
             }
         );
-        this.coinMarketService.findCryptoBySymbol(this.symbol)
-            .then(crypto => {
-                this.setState({
-                    crypto: crypto
-                })
-            });
+        // this.coinMarketService.findCryptoBySymbol(this.symbol)
+        //     .then(crypto => {
+        //         this.setState({
+        //             crypto: crypto
+        //         })
+        //     });
     }
 
     sharesInputChanged = (event) => {
@@ -54,23 +62,41 @@ export default class Details extends React.Component {
         );
     };
 
-    invest = () => {
+    clientChanged = (event) => {
+        this.setState(
+            {
+                client: event.target.value
+            }
+        );
+    };
+
+    request = () => {
         var trade = {
             tokens: parseInt(this.state.shares),
             priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
             sold: false,
             status: "PENDING",
-        }
+        };
         var user = this.state.user;
-        if (user.type === 'INVESTOR') {
-            this.investorService.requestTrade(user._id, user.broker, "5cbdc9b236e23d6b581fb43e", trade)
-                .then(response => console.log(response))
-        }
+        this.investorService.requestTrade(user._id, user.broker, "5cbdc9b236e23d6b581fb43e", trade)
+            .then(response => console.log(response))
     };
+
+    invest = () => {
+        var trade = {
+            tokens: parseInt(this.state.shares),
+            priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
+            sold: false,
+            status: "PROCESSED",
+        };
+        this.investorService.requestTrade(this.state.client._id, this.state.user._id,
+            "5cbdc9b236e23d6b581fb43e", trade)
+            .then(response => console.log(response))
+    }
 
     displayCorrectBox = () => {
         let buffer = [];
-        let role = "BROKER";
+        let role = this.state.user.type;
         switch (role) {
             case "INVESTOR":
                 buffer.push(
@@ -78,7 +104,7 @@ export default class Details extends React.Component {
                         <input type="text" className="form-control" placeholder="# of Shares"
                                onChange={this.sharesInputChanged}/>
                         <button type="button" className="btn btn-success btn-block"
-                                onClick={this.invest}>Request Shares
+                                onClick={this.request}>Request Shares
                         </button>
                     </div>
                 );
@@ -88,10 +114,21 @@ export default class Details extends React.Component {
                     <div className="btn-group" role="group">
                         <input type="text" className="form-control" placeholder="# of Shares"
                                onChange={this.sharesInputChanged}/>
-                        <select className={'form-control'}>
+                        <select className={'form-control'}
+                                value={this.state.client}
+                                onChange={this.clientChanged}>
                             <option>
                                 Client List
                             </option>
+                            {
+                                this.state.clients.map(client => {
+                                    return (
+                                        <option value={client._id}>
+                                            {client.firstName} {client.lastName}
+                                        </option>
+                                    )
+                                })
+                            }
                         </select>
                         <button type="button" className="btn btn-success btn-block"
                                 onClick={this.invest}>Invest

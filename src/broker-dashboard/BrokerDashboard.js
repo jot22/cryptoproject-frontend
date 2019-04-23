@@ -9,6 +9,7 @@ export default class BrokerDashboard extends Component {
         this.userService = UserService.getInstance();
         this.investorService = InvestorService.getInstance();
         this.state = {
+            client: null,
             user: {
                 clients: []
             },
@@ -31,6 +32,7 @@ export default class BrokerDashboard extends Component {
             .then(trades => {
                 console.log(trades)
                 this.setState({
+                    client: event.target.value,
                     investments: trades
                 })
             })
@@ -47,6 +49,7 @@ export default class BrokerDashboard extends Component {
 
                     <div className="btn-group special" id={"addClientBox"}>
                         <select className={'form-control'}
+                                value={this.state.client_id}
                                 onChange={this.selectClient}>
                             <option>
                                 Select a Client
