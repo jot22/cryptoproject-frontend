@@ -86,18 +86,17 @@ export default class NavBar extends React.Component {
             buffer.push(
                 <div id={"buttonDivider"}/>
             );
-            if(this.state.user.type === 'INVESTOR'){
-            buffer.push(
-                <Link to={'/portfolio'}>
-                    <button type={'button'}
-                            id={"portfolioButton"}
-                            className={'btn btn-primary'}>
-                        Portfolio
-                    </button>
-                </Link>
-            )
-            }
-            else{
+            if (this.state.user.type === 'INVESTOR') {
+                buffer.push(
+                    <Link to={'/portfolio'}>
+                        <button type={'button'}
+                                id={"portfolioButton"}
+                                className={'btn btn-primary'}>
+                            Portfolio
+                        </button>
+                    </Link>
+                )
+            } else {
                 buffer.push(
                     <Link to={'/brokerPortfolio'}>
                         <button type={'button'}
@@ -187,9 +186,11 @@ export default class NavBar extends React.Component {
                             <button onClick={this.getProfile}>
                                 Profile
                             </button>
-                            <button onClick={this.logout}>
-                                Logout
-                            </button>
+                            <Link to={'/'}>
+                                <button onClick={this.logout}>
+                                    Logout
+                                </button>
+                            </Link>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
