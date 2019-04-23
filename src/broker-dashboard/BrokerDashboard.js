@@ -26,9 +26,8 @@ export default class BrokerDashboard extends Component {
 
     render() {
         return (
-
-            <div id={"mainPortfolioContainer"}>
-                <h1 id={"portHeader"}>
+            <div id={"mainBrokerDashContainer"}>
+                <h1 id={"brokerHeader"}>
                     Broker Dashboard
                 </h1>
                 <div className={"row"} id={"performanceBar"}>
@@ -40,27 +39,21 @@ export default class BrokerDashboard extends Component {
                                 Client List
                             </option>
                         </select>
-                        <button type="button" className="btn btn-success">Primary</button>
-
+                        <button type="button" className="btn btn-success" id={"addClientButton"}>Add Client</button>
                     </div>
                 </div>
                 <div id="mainTable" className="table-responsive table-hover">
                     <table className="table">
                         <thead id="tableHead">
                         <tr>
-                            <th>Coin</th>
+                            <th>Client Name</th>
+                            <th>Total Invested</th>
                             <th>
-                                <div className="d-none d-md-block">Shares <i className="fa fa-caret-down"
-                                                                             aria-hidden="true"/>
-                                </div>
+                                <div>Performance</div>
                             </th>
-                            <th>
-                                <div className="d-none d-md-block">Dollar</div>
-                            </th>
-                            <th>Change Percent</th>
-                            <th>Processing Status</th>
-                            <th>Button</th>
-                            <th>Total</th>
+
+                            <th>Available USD</th>
+                            <th>Remove Client</th>
                         </tr>
                         </thead>
                         <tbody id={"tableBodyPort"}>
@@ -87,20 +80,7 @@ export default class BrokerDashboard extends Component {
                                             <td>
                                                 {investment.type}
                                             </td>
-                                            <td>
-                                                {
-                                                    (investment.type === 'PROCESSED' &&
-                                                        <button type={'button'}
-                                                                className={'btn btn-danger'}>
-                                                            Sell
-                                                        </button>)
-                                                    ||
-                                                    <button type={'button'}
-                                                            className={'btn btn-danger'}>
-                                                        Cancel
-                                                    </button>
-                                                }
-                                            </td>
+
                                         </tr>
                                     )
                                 }

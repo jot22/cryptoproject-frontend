@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e83d7746-8695-45ca-bcf5-0baf3677cd3b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/navbar/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+            <state relative-caret-position="85">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="45" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -30,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state>
+              <caret column="24" selection-start-column="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -80,8 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>link</find>
-      <find>faculty</find>
       <find>widgetSelectHeading</find>
       <find>Link</find>
       <find>signInButton</find>
@@ -110,6 +109,8 @@
       <find>text-</find>
       <find>Search</find>
       <find>portfolio</find>
+      <find>portHeader</find>
+      <find>mainPortfolioContainer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,8 +142,8 @@
         <option value="$PROJECT_DIR$/src/investor-dashboard/InvestorDashboard.js" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/BrokerDashboard.js" />
         <option value="$PROJECT_DIR$/src/navbar/NavBar.js" />
-        <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" />
         <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js" />
+        <option value="$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css" />
       </list>
     </option>
   </component>
@@ -245,7 +246,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37621000" />
+    <option name="totallyTimeSpent" value="37864000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1316" height="784" extended-state="6" />
@@ -465,15 +466,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state>
+          <caret column="24" selection-start-column="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/broker-dashboard/BrokerDashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        <state relative-caret-position="85">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="45" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
