@@ -226,7 +226,7 @@ export default class Profile extends React.Component {
                             <div className="col-sm-7">
                                 <select className="form-control" id="email"
                                         value={this.state.user.broker}
-                                        readOnly={(this.state.user.broker != null)}
+                                        disabled={(this.state.user.broker != null)}
                                         onChange={this.updateBroker}>
                                     <option>
                                         Select a Broker

@@ -1,27 +1,39 @@
 import React, {Component} from 'react';
 import './BrokerDashboard.css'
+import UserService from "../services/UserService";
+import InvestorService from "../services/InvestorService";
 
 export default class BrokerDashboard extends Component {
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
+        this.investorService = InvestorService.getInstance();
         this.state = {
-            investments: [
-                {
-                    name: 'Bitcoin',
-                    symbol: 'BTC',
-                    shares: 10,
-                    type: 'PROCESSED',
-                    dollar_change: 50.00,
-                    percent_change: 1.20
-                },
-                {
-                    name: 'Ethereum',
-                    symbol: 'ETH',
-                    shares: 5,
-                    type: 'PENDING'
-                }
-            ]
+            user: {
+                clients: []
+            },
+            investments: []
         }
+    }
+
+    componentDidMount() {
+        this.userService.profile().then(
+            user => {
+                this.setState({
+                    user: user
+                })
+            }
+        )
+    }
+
+    selectClient = event => {
+        this.investorService.findTradeByInvestor(event.target.value)
+            .then(trades => {
+                console.log(trades)
+                this.setState({
+                    investments: trades
+                })
+            })
     }
 
     render() {
@@ -34,12 +46,22 @@ export default class BrokerDashboard extends Component {
                     <h4>Overall Performance: <span className="badge badge-secondary"> 45%</span></h4>
 
                     <div className="btn-group special" id={"addClientBox"}>
-                        <select className={'form-control'}>
+                        <select className={'form-control'}
+                                onChange={this.selectClient}>
                             <option>
-                                Client List
+                                Select a Client
                             </option>
+                            {
+                                this.state.user.clients.map(client => {
+                                        return (
+                                            <option value={client._id}>
+                                                {client.firstName} {client.lastName}
+                                            </option>
+                                        )
+                                    }
+                                )
+                            }
                         </select>
-                        <button type="button" className="btn btn-success" id={"addClientButton"}>Add Client</button>
                     </div>
                 </div>
                 <div id="mainTable" className="table-responsive table-hover">
