@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e83d7746-8695-45ca-bcf5-0baf3677cd3b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/api-content/ApiContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-content/ApiContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BrokerService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BrokerService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/InvestorService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/InvestorService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/api-content/ApiContent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
+            <state relative-caret-position="72">
+              <caret line="94" column="46" selection-start-line="94" selection-start-column="22" selection-end-line="94" selection-end-column="46" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -41,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="63" selection-end-column="29" />
+            <state relative-caret-position="140">
+              <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-end-line="63" />
             </state>
           </provider>
         </entry>
@@ -152,7 +151,6 @@
         <option value="$PROJECT_DIR$/src/home/HomePage.css" />
         <option value="$PROJECT_DIR$/src/details/Details.js" />
         <option value="$PROJECT_DIR$/src/login/Login.js" />
-        <option value="$PROJECT_DIR$/src/services/UserService.js" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/InvestorDashboard.css" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/InvestorDashboard.js" />
         <option value="$PROJECT_DIR$/src/investor-dashboard/BrokerDashboard.js" />
@@ -162,6 +160,7 @@
         <option value="$PROJECT_DIR$/src/broker-client-dashboard/BrokerClientDashboard.js" />
         <option value="$PROJECT_DIR$/src/services/InvestorService.js" />
         <option value="$PROJECT_DIR$/src/services/BrokerService.js" />
+        <option value="$PROJECT_DIR$/src/services/UserService.js" />
         <option value="$PROJECT_DIR$/src/api-content/ApiContent.js" />
       </list>
     </option>
@@ -264,7 +263,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40871000" />
+    <option name="totallyTimeSpent" value="42520000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
@@ -498,13 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="63" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/InvestorService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -519,10 +511,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/api-content/ApiContent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
+        <state relative-caret-position="72">
+          <caret line="94" column="46" selection-start-line="94" selection-start-column="22" selection-end-line="94" selection-end-column="46" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

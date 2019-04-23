@@ -50,10 +50,10 @@ export default class UserService {
                 'Content-Type': 'application/json'
             },
         }).then(response => response.json());
-    }
+    };
 
-    updateProfile = (user) => {
-        return fetch(USER_API_URL + "profile", {
+    updateUser = (userId, user) => {
+        return fetch(USER_API_URL + "user/" + userId, {
             credentials: "include",
             method: 'put',
             body: JSON.stringify(user),
@@ -62,7 +62,7 @@ export default class UserService {
             }
         }).then(response =>
             response.json());
-    }
+    };
 
     register = (user) => {
 

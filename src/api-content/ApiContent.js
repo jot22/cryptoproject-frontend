@@ -82,12 +82,29 @@ export default class ApiContent extends React.Component {
         });
     }
 
+    // Update User
+    updateUser() {
+        let user = {
+            username: "Hello",
+            password: "World",
+            firstName: "JT",
+            lastName: "Norris",
+            type: "BROKER",
+            wallet: 10000
+        };
+        let userId = "5cbcc9c37892164cf88ae99b";
+        this.userService.updateUser(userId, user).then(user => {
+            console.log("Update");
+            console.log(user)
+        })
+    }
+
     render() {
         return(
             <div className={"White"}>
                 Hello World!
                 <button type="button" className="btn btn-success " id={"profile"}
-                        onClick={() => this.updateTrade()}>Trades
+                        onClick={() => this.updateUser()}>Trades
                 </button>
             </div>
         )
