@@ -12,6 +12,17 @@
     max-width: 535px;
 }
 
+#selectLabel{
+    color: white;
+    font-size: 1.3em;
+    font-family: Consolas, serif;
+    min-width: 150px;
+    font-weight: 900;
+    margin-left:20px;
+    margin-right:20px;
+    padding-top:3px;
+}
+
 
 #tableHead {
     background-color: #EFEFEF;

@@ -30,7 +30,7 @@ export default class BrokerService {
             }
         }).then(response =>
             response.json());
-    }
+    };
 
     deleteTrade = (tradeId, trade) => {
         return fetch(INVEST_API_URL + 'trade/' + tradeId, {

@@ -39,7 +39,7 @@ export default class BrokerClientDashboard extends Component {
                         investments: trades
                     }
                 ))
-    }
+    };
 
     sellTrade = (trade) => {
         trade.sold = true;

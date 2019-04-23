@@ -36,13 +36,13 @@ export default class BrokerDashboard extends Component {
         }
         this.investorService.findTradeByInvestor(event.target.value)
             .then(trades => {
-                console.log(trades)
+                console.log(trades);
                 this.setState({
                     client: trades.investor,
                     investments: trades
                 })
             })
-    }
+    };
 
     render() {
         return (
@@ -51,10 +51,11 @@ export default class BrokerDashboard extends Component {
                     Broker Dashboard
                 </h1>
                 <div className={"row"} id={"performanceBar"}>
-                    <h4>Overall Performance: <span className="badge badge-secondary"> 45%</span></h4>
 
                     <div className="btn-group special" id={"addClientBox"}>
+                        <label id={"selectLabel"} htmlFor="selectClientSelect">Select Client</label>
                         <select className={'form-control'}
+                                id="selectClientSelect"
                                 value={this.state.client_id}
                                 onChange={this.selectClient}>
                             <option value={undefined}>
@@ -77,14 +78,14 @@ export default class BrokerDashboard extends Component {
                     <table className="table">
                         <thead id="tableHead">
                         <tr>
-                            <th>Client Name</th>
-                            <th>Total Invested</th>
-                            <th>
-                                <div>Performance</div>
-                            </th>
+                            <th>Coin Name</th>
+                            <th>Tokens</th>
+                            <th>Buy Price $</th>
 
-                            <th>Available USD</th>
-                            <th>Remove Client</th>
+                            <th>Current Value $</th>
+                            <th>Gain / Loss</th>
+                            <th>Amount To Sell</th>
+                            <th>Sell</th>
                         </tr>
                         </thead>
                         <tbody id={"tableBodyPort"}>

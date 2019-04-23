@@ -109,7 +109,7 @@ export default class HomePage extends React.Component {
                         </Link>
                     </div>
 
-                )
+                );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>
                         <TradingViewWidget symbol={this.state.ticker}

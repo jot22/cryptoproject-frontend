@@ -35,7 +35,7 @@ export default class UserService {
         }).then(response =>
             response.json())
             .catch(() => alert("Wrong username/password combination"));
-    }
+    };
 
 
     logout = () => {
@@ -46,7 +46,7 @@ export default class UserService {
                 'content-type': 'application/json'
             }
         })
-    }
+    };
 
     profile = () => {
         return fetch(USER_API_URL + "profile", {
