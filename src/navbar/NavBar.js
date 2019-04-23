@@ -88,21 +88,23 @@ export default class NavBar extends React.Component {
             );
             if (this.state.user.type === 'INVESTOR') {
                 buffer.push(
-                    <Link to={'/portfolio'}>
+                    <Link to={'/'}>
                         <button type={'button'}
                                 id={"portfolioButton"}
-                                className={'btn btn-primary'}>
-                            Portfolio
+                                className={'btn btn-primary'}
+                                onClick={this.logout}>
+                            Log Out
                         </button>
                     </Link>
                 )
             } else {
                 buffer.push(
-                    <Link to={'/brokerPortfolio'}>
+                    <Link to={'/'}>
                         <button type={'button'}
                                 id={"portfolioButton"}
-                                className={'btn btn-primary'}>
-                            Portfolios
+                                className={'btn btn-primary'}
+                                onClick={this.logout}>
+                            Log Out
                         </button>
                     </Link>
                 )
@@ -182,11 +184,6 @@ export default class NavBar extends React.Component {
                             <button onClick={this.getProfile}>
                                 Profile
                             </button>
-                            <Link to={'/'}>
-                                <button onClick={this.logout}>
-                                    Logout
-                                </button>
-                            </Link>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"

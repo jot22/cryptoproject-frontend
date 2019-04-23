@@ -23,11 +23,13 @@ export default class HomePage extends React.Component {
 
     loadCorrectContent = () => {
         let role = '';
-        if (this.props.user.type === 'BROKER' || this.props.user.type === 'INVESTOR') {
+        if (this.props.user.type === 'BROKER') {
+            role = 'broker';
+        }
+        if (this.props.user.type === 'INVESTOR') {
             role = 'member';
         }
 
-        role = 'broker';
         let buffer = [];
         switch (role) {
             case "member":
@@ -108,7 +110,6 @@ export default class HomePage extends React.Component {
                             </button>
                         </Link>
                     </div>
-
                 );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>
