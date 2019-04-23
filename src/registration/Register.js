@@ -212,12 +212,12 @@ export default class Register extends React.Component {
                                 </button>
                                 <div className="row">
                                     <div className="col-6">
-                                        <a href={""} id={"registerLink"}>
+                                        <a href={"/login"} id={"registerLink"}>
                                             Sign In
                                         </a>
                                     </div>
                                     <div className="col-6">
-                                        <a href={""} className={"float-right"} id={"registerLink"}>
+                                        <a href={"/"} className={"float-right"} id={"registerLink"}>
                                             Back Home
                                         </a>
                                     </div>

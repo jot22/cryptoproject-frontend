@@ -76,10 +76,10 @@ export default class Login extends React.Component {
                                 </button>
                                 <div className="row">
                                     <div className="col-6">
-                                        <a href={""} id={"registerLink"}>New User? Register</a>
+                                        <a href={"/register"} id={"registerLink"}>New User? Register</a>
                                     </div>
                                     <div className="col-6">
-                                        <a href={""} id={"homeLink"}>Back Home</a>
+                                        <a href={"/"} id={"homeLink"}>Back Home</a>
                                     </div>
                                 </div>
                             </div>
