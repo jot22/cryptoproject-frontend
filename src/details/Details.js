@@ -72,7 +72,8 @@ export default class Details extends React.Component {
     request = () => {
         var trade = {
             tokens: parseInt(this.state.shares),
-            priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
+            priceWhenBought: 6000,
+            // priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
             sold: false,
             status: "PENDING",
         };

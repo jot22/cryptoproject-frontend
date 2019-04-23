@@ -33,8 +33,9 @@ export default class BrokerClientDashboard extends Component {
 
     sellTrade = (trade) => {
         trade.sold = true;
-        this.brokerService.updateTrade(trade._id, trade)
-            .then(response => console.log(response));
+        console.log(trade)
+        // this.brokerService.updateTrade(trade._id, trade)
+        //     .then(response => console.log(response));
     }
 
 
@@ -78,41 +79,51 @@ export default class BrokerClientDashboard extends Component {
                         </thead>
                         <tbody id={"tableBodyPort"}>
                         {
-                            this.state.investments.map(investment => {
-                                    return (
-                                        <tr id={"tableRows"}>
-                                            <td>
-                                                {investment.crypto} ({investment.symbol})
-                                            </td>
-                                            <td>
-                                                {investment.tokens}
-                                            </td>
-                                            <td>
-                                                {investment.priceWhenBought}
-                                            </td>
-                                            <td>
-                                                {(investment.type === 'PROCESSED' &&
-                                                    '$' + investment.dollar_change)
-                                                || '-'}
-                                            </td>
-                                            <td>
-                                                {(investment.type === 'PROCESSED' &&
-                                                    investment.percent_change + '%')
-                                                || '-'}
-                                            </td>
-                                            <td>
+                            this.state.investments.filter(trade => trade.sold === false)
+                                .map(investment => {
+                                        return (
+                                            <tr id={"tableRows"}>
+                                                <td>
+                                                    {investment.crypto} ({investment.symbol})
+                                                </td>
+                                                <td>
+                                                    {investment.tokens}
+                                                </td>
+                                                <td>
+                                                    {investment.priceWhenBought}
+                                                </td>
+                                                <td>
+                                                    {(investment.type === 'PROCESSED' &&
+                                                        '$' + investment.dollar_change)
+                                                    || '-'}
+                                                </td>
+                                                <td>
+                                                    {(investment.type === 'PROCESSED' &&
+                                                        investment.percent_change + '%')
+                                                    || '-'}
+                                                </td>
+                                                <td>
 
-                                                <input placeholder="Amount To Sell"/>
-                                            </td>
-                                            <td>
-                                                <button type="button" className="btn btn-danger"
-                                                        onClick={() => this.sellTrade(investment)}>Sell
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            )
+                                                    <input placeholder="Amount To Sell"/>
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                            className={"btn btn-danger " +
+                                                            ((investment.status === 'PROCESSED') ? 'd-none' : "")}
+                                                            onClick={() => this.sellTrade(investment)}>
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button"
+                                                            className={"btn btn-danger " +
+                                                            ((investment.status === 'PENDING') ? 'd-none' : "")}
+                                                            onClick={() => this.sellTrade(investment)}>
+                                                        Sell
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                )
                         }
                         </tbody>
                     </table>
