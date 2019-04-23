@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TradingViewWidget from 'react-tradingview-widget';
+import UserService from "../services/UserService";
 
 
 //Figured out how to embed the TradingView widget from here,
@@ -12,8 +13,9 @@ import TradingViewWidget from 'react-tradingview-widget';
 export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
-
+        this.userService = UserService.getInstance();
         this.state = {
+            user: {},
             ticker: 'COINBASE:BTCUSD'
         }
     }
@@ -23,7 +25,10 @@ export default class HomePage extends React.Component {
     }
 
     loadCorrectContent = () => {
-        let role = "member";
+        let role = '';
+        if (this.props.user.type === 'BROKER' || this.props.user.type === 'INVESTOR') {
+            role = 'member';
+        }
         let buffer = [];
         switch (role) {
             case "member":
@@ -46,7 +51,6 @@ export default class HomePage extends React.Component {
                         <i className="fas fa-coins" id={"bitcoin"}><label id={"forRipple"}>Ripple</label></i>
                     </span>
                     </div>
-
                 );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>

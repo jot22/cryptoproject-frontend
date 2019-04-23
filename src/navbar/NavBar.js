@@ -205,7 +205,8 @@ export default class NavBar extends React.Component {
                     <div>
                         <Route path="/"
                                exact
-                               component={HomePage}/>
+                               render={() => <HomePage
+                                   user={this.state.user}/>}/>
                         <Route path="/login" exact
                                render={() => <Login
                                    setUser={this.setUser}/>}/>
