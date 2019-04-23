@@ -23,7 +23,6 @@ export default class BrokerService {
 
     updateTrade = (tradeId, trade) => {
         return fetch(INVEST_API_URL + "trade/" + tradeId, {
-            credentials: "include",
             method: 'put',
             body: JSON.stringify(trade),
             headers: {

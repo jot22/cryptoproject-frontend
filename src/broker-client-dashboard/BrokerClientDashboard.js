@@ -43,13 +43,14 @@ export default class BrokerClientDashboard extends Component {
 
     sellTrade = (trade) => {
         trade.sold = true;
-        console.log(trade)
-        // this.brokerService.updateTrade(trade._id, trade)
-        //     .then(response => console.log(response));
+        this.brokerService.updateTrade(trade._id, trade)
+            .then(response => {
+                console.log(response)
+                this.findAllTrades()
+            });
     }
 
     cancelTrade = (trade) => {
-        console.log(trade)
         this.brokerService.deleteTrade(trade._id, trade).then(
             response => this.findAllTrades()
         )
