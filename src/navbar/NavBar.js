@@ -11,17 +11,25 @@ import Details from '../details/Details';
 import Search from "../search/Search";
 import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
 import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
+import UserService from "../services/UserService";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
         this.topTicker = React.createRef();
         this.state = {
+            user: {},
             searchInput: ""
         };
     }
 
     componentDidMount() {
+        this.userService.profile().then(
+            user => {
+                this.setState({user: user});
+            }
+        );
         const script = document.createElement('script');
         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
         script.async = true;

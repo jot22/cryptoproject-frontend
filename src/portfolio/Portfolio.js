@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import './Portfolio.css'
+import UserService from "../services/UserService";
 
 export default class Portfolio extends Component {
     constructor(props) {
         super(props);
+        this.userService = UserService.getInstance();
         this.state = {
             investments: [
                 {
@@ -22,6 +24,12 @@ export default class Portfolio extends Component {
                 }
             ]
         }
+    }
+
+    componentDidMount() {
+        this.userService.profile().then(
+            response => console.log(response)
+        );
     }
 
     render() {
