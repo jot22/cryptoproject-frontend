@@ -86,18 +86,17 @@ export default class NavBar extends React.Component {
             buffer.push(
                 <div id={"buttonDivider"}/>
             );
-            if(this.state.user.type === 'INVESTOR'){
-            buffer.push(
-                <Link to={'/portfolio'}>
-                    <button type={'button'}
-                            id={"portfolioButton"}
-                            className={'btn btn-primary'}>
-                        Portfolio
-                    </button>
-                </Link>
-            )
-            }
-            else{
+            if (this.state.user.type === 'INVESTOR') {
+                buffer.push(
+                    <Link to={'/portfolio'}>
+                        <button type={'button'}
+                                id={"portfolioButton"}
+                                className={'btn btn-primary'}>
+                            Portfolio
+                        </button>
+                    </Link>
+                )
+            } else {
                 buffer.push(
                     <Link to={'/brokerPortfolio'}>
                         <button type={'button'}
@@ -135,18 +134,14 @@ export default class NavBar extends React.Component {
     };
 
     properRole = () => {
-        let role = 2;
-        switch (role) {
-            case 1:
-                return "Guest";
-            case 2:
-                return "Member";
-            case 3:
+        switch (this.state.user.type) {
+            case "BROKER":
                 return "Broker";
+            case "INVESTOR":
+                return "Investor";
             default:
                 return "Guest";
         }
-
     };
 
     searchInputChanged = (event) => {
@@ -159,16 +154,16 @@ export default class NavBar extends React.Component {
 
     getProfile = () => {
         this.userService.profile().then(response => console.log(response))
-    }
+    };
 
     logout = () => {
         this.userService.logout().then(response =>
             this.setState({user: {type: 'GUEST'}}))
-    }
+    };
 
     setUser = (user) => {
         this.setState({user: user})
-    }
+    };
 
     render() {
         return (
@@ -178,7 +173,7 @@ export default class NavBar extends React.Component {
                         <div id={"tickerBox"} ref={this.topTicker}/>
                         <nav className="navbar navbar-dark bg-dark justify-content-between">
                             <label className="navbar-brand">
-                                <Link to="/" id={"websiteName"}>Creepo Investing | {this.properRole()}</Link>
+                                <Link to="/" id={"websiteName"}>Piggybank Investing | {this.properRole()}</Link>
                             </label>
 
                             <label className="navbar-brand " id={"apiHooks"}>
@@ -187,9 +182,11 @@ export default class NavBar extends React.Component {
                             <button onClick={this.getProfile}>
                                 Profile
                             </button>
-                            <button onClick={this.logout}>
-                                Logout
-                            </button>
+                            <Link to={'/'}>
+                                <button onClick={this.logout}>
+                                    Logout
+                                </button>
+                            </Link>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
@@ -208,7 +205,8 @@ export default class NavBar extends React.Component {
                     <div>
                         <Route path="/"
                                exact
-                               component={HomePage}/>
+                               render={() => <HomePage
+                                   user={this.state.user}/>}/>
                         <Route path="/login" exact
                                render={() => <Login
                                    setUser={this.setUser}/>}/>

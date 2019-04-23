@@ -146,6 +146,52 @@ export default class Profile extends React.Component {
     //
     // }
 
+    loadInvestorOnly = () => {
+        let buffer = [];
+        if(this.state.user.type === "INVESTOR"){
+            buffer.push(
+                <div className="form-group row">
+                    <label form="email"
+                           className="col-sm-5 col-form-label" id={"usernameLabel"}>Managed By</label>
+                    <div className="col-sm-7">
+                        <select className="form-control" id="email"
+                                value={this.state.user.broker}
+                                disabled={(this.state.user.broker != null)}
+                                onChange={this.updateBroker}>
+                            <option>
+                                Select a Broker
+                            </option>
+                            {
+                                this.state.brokers.map(broker => {
+                                        return (
+                                            <option value={broker._id}>
+                                                {broker.firstName} {broker.lastName}
+                                            </option>
+                                        )
+                                    }
+                                )
+                            }
+                        </select>
+                    </div>
+                </div>
+            );
+            buffer.push(
+                <div className="form-group row">
+                    <label form="dob"
+                           className="col-sm-5 col-form-label" id={"usernameLabel"}>Wallet</label>
+                    <div className="col-sm-7">
+                        <input type="email"
+                               className="form-control" id="dob"
+                               onChange={this.updateWallet}
+                               placeholder={9001}
+                               defaultValue={this.state.user.wallet}/>
+                    </div>
+                </div>
+            );
+        }
+        return buffer;
+    };
+
     render() {
         return (
             <div id={"bigProfileContain"}>
@@ -197,45 +243,7 @@ export default class Profile extends React.Component {
                                        placeholder={"google@gmail.com"}/>
                             </div>
                         </div>
-
-                        <div className="form-group row">
-                            <label form="email"
-                                   className="col-sm-5 col-form-label" id={"usernameLabel"}>Managed By</label>
-                            <div className="col-sm-7">
-                                <select className="form-control" id="email"
-                                        value={this.state.user.broker}
-                                        readOnly={(this.state.user.broker != null)}
-                                        onChange={this.updateBroker}>
-                                    <option>
-                                        Select a Broker
-                                    </option>
-                                    {
-                                        this.state.brokers.map(broker => {
-                                                return (
-                                                    <option value={broker._id}>
-                                                        {broker.firstName} {broker.lastName}
-                                                    </option>
-                                                )
-                                            }
-                                        )
-                                    }
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="form-group row">
-                            <label form="dob"
-                                   className="col-sm-5 col-form-label" id={"usernameLabel"}>Wallet</label>
-                            <div className="col-sm-7">
-                                <input type="email"
-                                       className="form-control" id="dob"
-                                       onChange={this.updateWallet}
-                                       placeholder={9001}
-                                       defaultValue={this.state.user.wallet}/>
-                            </div>
-                        </div>
-
-
+                        {this.loadInvestorOnly()}
                         <div className="form-group row">
                             <label className="col-sm-5 col-form-label" id={"usernameLabel"}/>
                             <div className="col-sm-7">
@@ -245,13 +253,12 @@ export default class Profile extends React.Component {
                                         Update
                                     </button>
                                 </a>
-                                <a href={""} style={{textDecoration: 'none'}}>
-                                    <Link to={'/'}>
-                                        <button type={"button"} className={"btn btn-warning btn-block"}>
-                                            Back Home
-                                        </button>
-                                    </Link>
-                                </a>
+
+                                <Link to={'/'}>
+                                    <button type={"button"} className={"btn btn-warning btn-block"}>
+                                        Back Home
+                                    </button>
+                                </Link>
                             </div>
                         </div>
 
