@@ -12,8 +12,7 @@ export default class Details extends React.Component {
         this.investorService = InvestorService.getInstance();
         this.symbol = props.match.params.symbol;
         this.state = {
-            clients: [],
-            client: null,
+            client: undefined,
             user: {},
             shares: '',
             crypto: {
@@ -38,10 +37,9 @@ export default class Details extends React.Component {
         this.userService.profile().then(
             user => {
                 if (user.type === 'BROKER') {
-                    this.setState({
-                        user: user,
-                        clients: user.clients
-                    })
+                    this.userService.findUserById(user._id).then(
+                        user => this.setState({user: user})
+                    )
                 } else {
                     this.setState({user: user});
                 }
@@ -84,13 +82,16 @@ export default class Details extends React.Component {
     };
 
     invest = () => {
+        if (this.state.client === undefined) {
+            return
+        }
         var trade = {
             tokens: parseInt(this.state.shares),
             priceWhenBought: parseInt(this.state.crypto.data[this.symbol].quote.USD.price),
             sold: false,
             status: "PROCESSED",
         };
-        this.investorService.requestTrade(this.state.client._id, this.state.user._id,
+        this.investorService.requestTrade(this.state.client, this.state.user._id,
             "5cbdc9b236e23d6b581fb43e", trade)
             .then(response => console.log(response))
     }
@@ -118,11 +119,11 @@ export default class Details extends React.Component {
                         <select className={'form-control'}
                                 value={this.state.client}
                                 onChange={this.clientChanged}>
-                            <option>
+                            <option value={undefined}>
                                 Client List
                             </option>
                             {
-                                this.state.clients.map(client => {
+                                this.state.user.clients.map(client => {
                                     return (
                                         <option value={client._id}>
                                             {client.firstName} {client.lastName}

@@ -9,7 +9,7 @@ export default class BrokerDashboard extends Component {
         this.userService = UserService.getInstance();
         this.investorService = InvestorService.getInstance();
         this.state = {
-            client: null,
+            client: undefined,
             user: {
                 clients: []
             },
@@ -20,19 +20,25 @@ export default class BrokerDashboard extends Component {
     componentDidMount() {
         this.userService.profile().then(
             user => {
-                this.setState({
-                    user: user
-                })
+                this.userService.findUserById(user._id).then(
+                    user => this.setState({user: user})
+                )
             }
         )
     }
 
     selectClient = event => {
+        if (event.target.value === undefined) {
+            this.setState({
+                client: event.target.value,
+                investments: []
+            })
+        }
         this.investorService.findTradeByInvestor(event.target.value)
             .then(trades => {
                 console.log(trades)
                 this.setState({
-                    client: event.target.value,
+                    client: trades.investor,
                     investments: trades
                 })
             })
@@ -51,7 +57,7 @@ export default class BrokerDashboard extends Component {
                         <select className={'form-control'}
                                 value={this.state.client_id}
                                 onChange={this.selectClient}>
-                            <option>
+                            <option value={undefined}>
                                 Select a Client
                             </option>
                             {
