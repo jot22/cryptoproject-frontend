@@ -12,6 +12,7 @@ import Search from "../search/Search";
 import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
 import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
 import UserService from "../services/UserService";
+import Followers from "../followers/Followers";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export default class NavBar extends React.Component {
             searchInput: ""
         };
     }
+
 
     componentDidMount() {
         this.userService.profile().then(
@@ -217,6 +219,9 @@ export default class NavBar extends React.Component {
                         <Route path={'/details/:symbol'}
                                exact
                                component={Details}/>
+                        <Route path={'/followers'}
+                               exact
+                               component={Followers}/>
                         <Route path={'/portfolio'}
                                render={() => <BrokerClientDashboard/>}/>
                         <Route path={'/brokerPortfolio'}
