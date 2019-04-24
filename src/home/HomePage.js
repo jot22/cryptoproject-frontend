@@ -75,32 +75,20 @@ export default class HomePage extends React.Component {
                 buffer.push(
                     <div className={"col-3"} id={"leftPanel"}>
                         <h3 id={"selectInstrument"}>At A Glance</h3>
-                        <h6 id={"portfolioValue"}>Portfolio Value: $4500</h6>
                         <h6 id={"portfolioValue"}>Managed By: {this.state.broker.firstName}</h6>
-                        <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
-                        <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
-                        <select className={'form-control'} onChange={(m) => {
-                            this.setState({ticker: m.target.value})
-                        }}>
-                            <option value={"COINBASE:BTCUSD"}>
-                                Bitcoin
-                            </option>
-                            <option value={"COINBASE:ETHUSD"}>
-                                Ethereum
-                            </option>
-                            <option value={"BITFINEX:XMRUSD"}>
-                                Monero
-                            </option>
-                            <option value={"COINBASE:XRPUSD"}>
-                                Ripple
-                            </option>
-                        </select>
                         <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
                         <Link to={'/followers'}>
                             <button type={'button'}
                                     id={"portfolioButton"}
                                     className={'btn btn-primary btn-block'}>
                                 Portfolio
+                            </button>
+                        </Link>
+                        <Link to={'/dualExchange'}>
+                            <button type={'button'}
+                                    id={"portfolioButtonBottom"}
+                                    className={'btn btn-primary btn-block'}>
+                                Dual Exchange
                             </button>
                         </Link>
                     </div>
@@ -124,31 +112,19 @@ export default class HomePage extends React.Component {
                     <div className={"col-3"} id={"leftPanel"}>
                         <h3 id={"selectInstrument"}>At A Glance</h3>
                         <h6 id={"portfolioValue"}>Clients Managed: {this.props.user.clients.length}</h6>
-                        <h6 id={"portfolioValue"}>Overall Performance: 25%</h6>
-                        <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
-                        <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
-                        <select className={'form-control'} onChange={(m) => {
-                            this.setState({ticker: m.target.value})
-                        }}>
-                            <option value={"COINBASE:BTCUSD"}>
-                                Bitcoin
-                            </option>
-                            <option value={"COINBASE:ETHUSD"}>
-                                Ethereum
-                            </option>
-                            <option value={"BITFINEX:XMRUSD"}>
-                                Monero
-                            </option>
-                            <option value={"COINBASE:XRPUSD"}>
-                                Ripple
-                            </option>
-                        </select>
                         <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
                         <Link to={'/brokerPortfolio'}>
                             <button type={'button'}
                                     id={"portfolioButton"}
                                     className={'btn btn-primary btn-block'}>
                                 Portfolios
+                            </button>
+                        </Link>
+                        <Link to={'/dualExchange'}>
+                            <button type={'button'}
+                                    id={"portfolioButtonBottom"}
+                                    className={'btn btn-primary btn-block'}>
+                                Dual Exchange
                             </button>
                         </Link>
                     </div>
