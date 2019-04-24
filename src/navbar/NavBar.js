@@ -203,7 +203,7 @@ export default class NavBar extends React.Component {
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
                                        onChange={this.searchInputChanged}/>
-                                <Link to={'/search/' + this.state.searchInput}>
+                                <Link to={'/search'}>
                                     <button id={"submitButton"}
                                             className="btn btn-outline-success my-2 my-sm-0"
                                             type="submit">
@@ -240,7 +240,6 @@ export default class NavBar extends React.Component {
                         <Route path={'/brokerPortfolio'}
                                render={() => <BrokerDashboard/>}/>
                         <Route path={'/search/:criteria'}
-                               exact
                                component={Search}/>
                     </div>
                     <Footer/>

@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import './BrokerDashboard.css'
 import UserService from "../services/UserService";
 import InvestorService from "../services/InvestorService";
+import CoinMarketService from "../services/CoinMarketService";
+import BrokerService from "../services/BrokerService";
 
 export default class BrokerDashboard extends Component {
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
         this.investorService = InvestorService.getInstance();
+        this.coinMarketService = CoinMarketService.getInstance();
+        this.brokerService = BrokerService.getInstance();
         this.state = {
             client: undefined,
             user: {
@@ -31,18 +35,60 @@ export default class BrokerDashboard extends Component {
         if (event.target.value === undefined) {
             this.setState({
                 client: event.target.value,
-                investments: []
+                investments: [],
+                crptos: []
             })
         }
+        let temp = [];
         this.investorService.findTradeByInvestor(event.target.value)
             .then(trades => {
-                console.log(trades);
-                this.setState({
-                    client: trades.investor,
-                    investments: trades
-                })
+                console.log(trades)
+                trades.forEach(trade =>
+                    this.coinMarketService.findCryptoById(trade.crypto)
+                        .then(crypto => {
+                            console.log(crypto)
+                            temp.push(crypto);
+                            this.setState({
+                                client: trades.investor,
+                                investments: trades,
+                                cryptos: temp
+                            })
+                        }))
             })
     };
+
+    findAllTrades = () => {
+        this.investorService.findTradeByInvestor(this.state.client)
+            .then(trades =>
+                this.setState(
+                    {
+                        investments: trades
+                    }
+                ))
+    };
+
+    buyTrade = (trade, pwb) => {
+        trade.status = 'PROCESSED'
+        trade.priceWhenBought = pwb
+        this.brokerService.updateTrade(trade._id, trade)
+            .then(response => {
+                this.findAllTrades()
+            });
+    }
+
+    sellTrade = (trade) => {
+        trade.sold = true;
+        this.brokerService.updateTrade(trade._id, trade)
+            .then(response => {
+                this.findAllTrades()
+            });
+    }
+
+    cancelTrade = (trade) => {
+        this.brokerService.deleteTrade(trade._id, trade).then(
+            response => this.findAllTrades()
+        )
+    }
 
     render() {
         return (
@@ -91,26 +137,53 @@ export default class BrokerDashboard extends Component {
                         <tbody id={"tableBodyPort"}>
                         {
                             this.state.investments.map(investment => {
+                                    let i = this.state.investments.indexOf(investment)
                                     return (
                                         <tr id={"tableRows"}>
                                             <td>
-                                                {investment.name} ({investment.symbol})
+                                                {this.state.cryptos[i].data[investment.crypto].name} ({this.state.cryptos[i].data[investment.crypto].symbol})
                                             </td>
                                             <td>
-                                                {investment.shares}
+                                                {investment.tokens}
                                             </td>
                                             <td>
                                                 {(investment.type === 'PROCESSED' &&
-                                                    '$' + investment.dollar_change)
+                                                    '$' + investment.priceWhenBought)
                                                 || '-'}
                                             </td>
                                             <td>
                                                 {(investment.type === 'PROCESSED' &&
-                                                    investment.percent_change + '%')
+                                                    '$' + Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
                                                 || '-'}
                                             </td>
                                             <td>
-                                                {investment.type}
+                                                {(investment.type === 'PROCESSED' &&
+                                                    '$' + (investment.tokens *
+                                                        (Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price) - investment.priceWhenBought)))
+                                                || '-'}
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <button type="button"
+                                                        className={"btn btn-success " +
+                                                        ((investment.status === 'PROCESSED') ? 'd-none' : "")}
+                                                        onClick={() => this.buyTrade(investment,
+                                                            Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))}>
+                                                    Buy
+                                                </button>
+                                                <button type="button"
+                                                        className={"btn btn-danger " +
+                                                        ((investment.status === 'PROCESSED') ? 'd-none' : "")}
+                                                        onClick={() => this.cancelTrade(investment)}>
+                                                    Cancel
+                                                </button>
+                                                <button type="button"
+                                                        className={"btn btn-danger " +
+                                                        ((investment.status === 'PENDING') ? 'd-none' : "")}
+                                                        onClick={() => this.sellTrade(investment)}>
+                                                    Sell
+                                                </button>
                                             </td>
                                         </tr>
                                     )
