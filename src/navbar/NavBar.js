@@ -192,10 +192,12 @@ export default class NavBar extends React.Component {
                 <div id={"t"}>
                     <div id={"nav-bars"}>
                         <div id={"tickerBox"} ref={this.topTicker}/>
-                        <nav className="navbar navbar-dark bg-dark justify-content-between">
+                        <nav className="navbar navbar-dark bg-dark justify-content-between navbar-expand-lg" id={"mainNavBar"}>
+                            <div className="collapse navbar-collapse order-1 order-md-0">
                             <label className="navbar-brand">
                                 <Link to="/" id={"websiteName"}>Piggybank Investing | {this.properRole()}</Link>
                             </label>
+                            </div>
                             <form className="form-inline">
                                 <Link to={'/profileSearch'}>
                                     <button id={"submitButton"}
@@ -211,7 +213,9 @@ export default class NavBar extends React.Component {
                                         Coin Search
                                     </button>
                                 </Link>
+
                                 {this.loadButtonsLoggedInNot()}
+
                             </form>
                         </nav>
                     </div>

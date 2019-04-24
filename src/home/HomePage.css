@@ -43,11 +43,11 @@
     font-family: Consolas, serif;
 }
 
-#portfolioButtonBottom{
+#portfolioButtonBottom {
     background-color: black;
     border-color: black;
     font-family: Consolas, serif;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 #portfolioButton:hover {
@@ -80,7 +80,7 @@
 
 #t {
     height: 100vh;
-    min-width: 950px;
+    min-width: 908px;
 
 }
 
@@ -99,7 +99,7 @@
 
 #submitButton {
     font-family: Consolas, serif;
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 #websiteName {
@@ -122,8 +122,8 @@ body {
     color: white;
 }
 
-#selectInstrumentBottom{
-    margin-top:10px;
+#selectInstrumentBottom {
+    margin-top: 10px;
     font-family: Consolas, serif;
     font-weight: 700;
     border-bottom: 3px solid red;
@@ -162,30 +162,36 @@ body {
     font-family: Consolas, serif;
 }
 
-#guestBox{
+#guestBox {
     font-family: Consolas, serif;
     padding: 20px;
-    color:white;
+    color: white;
 }
 
-#pictureBox{
-    padding-left:20px;
+#pictureBox {
+    padding-left: 20px;
 }
 
-#newPanel{
+#newPanel {
     color: white;
     font-family: Consolas, serif;
-    padding:20px;
+    padding: 20px;
 }
 
 
-#marketOver{
+#marketOver {
     font-size: 2.7em;
     font-family: Consolas, serif;
     font-weight: 900;
     border-bottom: 3px solid red;
     max-width: 375px;
 }
+
+#mainNavBar {
+    min-height: 70px;
+    max-height: 70px;
+}
+
 
 
 
