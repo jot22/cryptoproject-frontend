@@ -3,6 +3,7 @@ import './Details.css';
 import CoinMarketService from "../services/CoinMarketService";
 import InvestorService from "../services/InvestorService";
 import UserService from "../services/UserService";
+import {Link} from 'react-router-dom';
 
 export default class Details extends React.Component {
     constructor(props) {
@@ -140,6 +141,12 @@ export default class Details extends React.Component {
                 );
                 break;
             default:
+                buffer.push(
+                    <Link to={'/login'}>
+                        <button type={'button'} className="btn btn-success">
+                            Login to Trade Currencies
+                        </button>
+                    </Link>);
                 return buffer;
 
         }
