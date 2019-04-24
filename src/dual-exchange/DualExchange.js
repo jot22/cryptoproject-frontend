@@ -11,6 +11,8 @@ export default class DualExchange extends Component {
         this.state = {
             btcCB: [],
             ethCB: [],
+            btCmc: {},
+            ethCmc: {}
         }
     }
 
@@ -21,9 +23,9 @@ export default class DualExchange extends Component {
         this.coinbase.getETHtoUSD().then(m => {
             this.setState({ethCB: m})
         });
-
-
-
+        this.cmc.findCryptoBySymbol("BTC").then(m => {
+            this.setState({btCmc: m.data}, () => console.log(this.state.btCmc))
+        })
 
     }
 
