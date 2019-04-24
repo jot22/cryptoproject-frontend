@@ -3,6 +3,7 @@ import React from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
 import UserService from "../services/UserService";
 import {Link} from "react-router-dom";
+import TradingViewGraph from '../trading-view/TradingViewGraph'
 
 
 //Figured out how to embed the TradingView widget from here,
@@ -12,6 +13,8 @@ import {Link} from "react-router-dom";
 // https://www.npmjs.com/package/react-tradingview-widget
 
 export default class HomePage extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
@@ -21,6 +24,7 @@ export default class HomePage extends React.Component {
         }
     }
 
+
     loadCorrectContent = () => {
         let role = '';
         if (this.props.user.type === 'BROKER') {
@@ -29,6 +33,8 @@ export default class HomePage extends React.Component {
         if (this.props.user.type === 'INVESTOR') {
             role = 'member';
         }
+
+        console.log("ROLE: "+role);
 
         let buffer = [];
         switch (role) {
@@ -57,7 +63,7 @@ export default class HomePage extends React.Component {
                             </option>
                         </select>
                         <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
-                        <Link to={'/portfolio'}>
+                        <Link to={'/followers'}>
                             <button type={'button'}
                                     id={"portfolioButton"}
                                     className={'btn btn-primary btn-block'}>
@@ -68,14 +74,10 @@ export default class HomePage extends React.Component {
                 );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>
-                        <TradingViewWidget symbol={this.state.ticker}
-                                           autosize={"true"}
-                                           theme={"dark"}
-                                           hide_top_toolbar={"true"}
-                                           toolbar_bg={"rgba(23, 32, 40, 1)"}
-                                           news={["headlines"]}/>
+                        <TradingViewGraph/>
                     </div>
                 );
+                return buffer;
                 break;
             case "broker":
                 buffer.push(
@@ -121,6 +123,7 @@ export default class HomePage extends React.Component {
                                            news={["headlines"]}/>
                     </div>
                 );
+                return buffer;
                 break;
             default:
                 buffer.push(
@@ -140,6 +143,9 @@ export default class HomePage extends React.Component {
     };
 
     render() {
+        if(this.props.user === null){
+            return null;
+        }
         return (
             <div className={"row flex-grow-1"} id={"mainContentContain"}>
                 {this.loadCorrectContent()}
