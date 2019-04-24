@@ -19,7 +19,6 @@ export default class ReadOnlyProfile extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.profileId);
         let found = false;
         this.userService.findAllUsers().then(m => {
             m.map(eachUser => {
@@ -88,9 +87,14 @@ export default class ReadOnlyProfile extends React.Component {
                                     <button type={"button"}
                                             className={"btn btn-success btn-block"}
                                             onClick={() => this.followUser(this.state.userFound)}>
-                                        Following
+                                        Follow
                                     </button>
                                 </a>
+                                <Link to={'/followers/'+this.state.userFound.username}>
+                                    <button type={"button"} className={"btn btn-primary btn-block"}>
+                                        Following
+                                    </button>
+                                </Link>
                                 <Link to={'/'}>
                                     <button type={"button"} className={"btn btn-warning btn-block"}>
                                         Back Home

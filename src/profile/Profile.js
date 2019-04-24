@@ -203,7 +203,11 @@ export default class Profile extends React.Component {
                                         Update
                                     </button>
                                 </a>
-
+                                <Link to={'/followers/'+this.state.user.username}>
+                                    <button type={"button"} className={"btn btn-primary btn-block"}>
+                                        Following
+                                    </button>
+                                </Link>
                                 <Link to={'/'}>
                                     <button type={"button"} className={"btn btn-warning btn-block"}>
                                         Back Home

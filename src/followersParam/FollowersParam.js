@@ -21,41 +21,75 @@ export default class FollowersParam extends Component {
     }
 
     componentDidMount() {
-
         this.follorService.findFollowingByUserId();
         let userNames = [];
         let lastNames = [];
         let brokerName = [];
-        this.userService.findUserByUsername(this.profileName).then(response => {
-            let id = response._id;
-            this.follorService.findFollowingByUserId(id).then(follows => {
-                this.setState({all: follows});
-                //console.log("HIT:" + JSON.stringify(follows));
-            }).then(() => {
-                    this.state.all.following.map(user => {
-                        this.userService.findUserById(user).then(out => {
-                                userNames.push(out.firstName);
-                                lastNames.push(out.lastName);
-                                this.userService.findUserById(out.broker).then(broker =>
-                                    brokerName.push(broker.firstName)
-                                ).then(() =>
-                                    this.setState({
-                                        brokerName: brokerName
-                                    })
-                                )
+        this.userService.findAllUsers().then(m => {
+            m.map(eachUser => {
+                if (eachUser.username === this.profileName) {
+                    let id = eachUser._id;
+                    this.follorService.findFollowingByUserId(id).then(follows => {
+                        this.setState({all: follows});
+                        //console.log("HIT:" + JSON.stringify(follows));
+                    }).then(() => {
+                            if (this.state.all) {
+                                this.state.all.following.map(user => {
+                                    this.userService.findUserById(user).then(out => {
+                                            userNames.push(out.firstName);
+                                            lastNames.push(out.lastName);
+                                            this.userService.findUserById(out.broker).then(broker =>
+                                                brokerName.push(broker.firstName)
+                                            ).then(() =>
+                                                this.setState({
+                                                    brokerName: brokerName
+                                                })
+                                            )
+                                        }
+                                    ).then(() =>
+                                        this.setState({
+                                            fName: userNames,
+                                            lName: lastNames
+                                        })
+                                    )
+                                })
                             }
-                        ).then(() =>
-                            this.setState({
-                                fName: userNames,
-                                lName: lastNames
-                            })
-                        )
-
-                    })
+                        }
+                    )
 
                 }
-            )
+            })
         });
+        // this.userService.findUserByUsername(this.profileName).then(response => {
+        //     let id = response._id;
+        //     this.follorService.findFollowingByUserId(id).then(follows => {
+        //         this.setState({all: follows});
+        //         //console.log("HIT:" + JSON.stringify(follows));
+        //     }).then(() => {
+        //             this.state.all.following.map(user => {
+        //                 this.userService.findUserById(user).then(out => {
+        //                         userNames.push(out.firstName);
+        //                         lastNames.push(out.lastName);
+        //                         this.userService.findUserById(out.broker).then(broker =>
+        //                             brokerName.push(broker.firstName)
+        //                         ).then(() =>
+        //                             this.setState({
+        //                                 brokerName: brokerName
+        //                             })
+        //                         )
+        //                     }
+        //                 ).then(() =>
+        //                     this.setState({
+        //                         fName: userNames,
+        //                         lName: lastNames
+        //                     })
+        //                 )
+        //
+        //             })
+        //
+        //         }
+        //     )
+        // });
     }
 
     renderComp = () => {
@@ -75,7 +109,7 @@ export default class FollowersParam extends Component {
 
     renderAll = () => {
         let buffer = [];
-        for(let a =0; a< this.state.fName.length;a++){
+        for (let a = 0; a < this.state.fName.length; a++) {
             buffer.push(
                 <tr>
                     <td id={"tableRows"}>
@@ -92,14 +126,14 @@ export default class FollowersParam extends Component {
 
         }
         return buffer;
-    }
+    };
 
     render() {
 
         return (
             <div id={"mainBrokerDashContainer"}>
                 <h1 id={"followerHeader"}>
-                    Client Name - Followers
+                    {this.profileName} - Followers
                 </h1>
 
                 <div id="mainTable" className="table-responsive table-hover">
