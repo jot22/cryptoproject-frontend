@@ -20,6 +20,7 @@ export default class BrokerClientDashboard extends Component {
 
     componentDidMount() {
         let temp = [];
+        let temp2 = [];
         this.userService.profile().then(
             user => {
                 this.investorService.findTradeByInvestor(user._id)
@@ -28,13 +29,14 @@ export default class BrokerClientDashboard extends Component {
                         trades.forEach(trade =>
                             this.coinMarketService.findCryptoById(trade.crypto)
                                 .then(crypto => {
-                                    console.log(crypto)
-                                    temp.push(crypto);
+                                    temp[trades.indexOf(trade)] = crypto;
+                                    temp2[trades.indexOf(trade)] = trade;
                                     this.setState({
                                         user: user,
-                                        investments: trades,
+                                        investments: temp2,
                                         cryptos: temp
                                     })
+                                    console.log(temp)
                                 }))
                     })
             }

@@ -36,10 +36,11 @@ export default class BrokerDashboard extends Component {
             this.setState({
                 client: event.target.value,
                 investments: [],
-                crptos: []
+                cryptos: []
             })
         }
         let temp = [];
+        let temp2 = [];
         this.investorService.findTradeByInvestor(event.target.value)
             .then(trades => {
                 console.log(trades)
@@ -47,10 +48,11 @@ export default class BrokerDashboard extends Component {
                     this.coinMarketService.findCryptoById(trade.crypto)
                         .then(crypto => {
                             console.log(crypto)
-                            temp.push(crypto);
+                            temp[trades.indexOf(trade)] = crypto;
+                            temp2[trades.indexOf(trade)] = trade;
                             this.setState({
                                 client: trades.investor,
-                                investments: trades,
+                                investments: temp2,
                                 cryptos: temp
                             })
                         }))
