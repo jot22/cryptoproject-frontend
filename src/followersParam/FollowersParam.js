@@ -25,6 +25,8 @@ export default class FollowersParam extends Component {
         let userNames = [];
         let lastNames = [];
         let brokerName = [];
+
+        let buff = [];
         this.userService.findAllUsers().then(m => {
             m.map(eachUser => {
                 if (eachUser.username === this.profileName) {
