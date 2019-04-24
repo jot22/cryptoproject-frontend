@@ -60,13 +60,30 @@ export default class BrokerDashboard extends Component {
     };
 
     findAllTrades = () => {
+        // this.investorService.findTradeByInvestor(this.state.client)
+        //     .then(trades =>
+        //         this.setState(
+        //             {
+        //                 investments: trades
+        //             }
+        //         ))
+        let temp = [];
+        let temp2 = [];
         this.investorService.findTradeByInvestor(this.state.client)
-            .then(trades =>
-                this.setState(
-                    {
-                        investments: trades
-                    }
-                ))
+            .then(trades => {
+                console.log(trades)
+                trades.forEach(trade =>
+                    this.coinMarketService.findCryptoById(trade.crypto)
+                        .then(crypto => {
+                            temp[trades.indexOf(trade)] = crypto;
+                            temp2[trades.indexOf(trade)] = trade;
+                            this.setState({
+                                investments: temp2,
+                                cryptos: temp
+                            }, () => this.forceUpdate())
+                        }))
+            })
+        this.forceUpdate()
     };
 
     buyTrade = (trade, pwb) => {
@@ -82,6 +99,7 @@ export default class BrokerDashboard extends Component {
         trade.sold = true;
         this.brokerService.updateTrade(trade._id, trade)
             .then(response => {
+                console.log(response)
                 this.findAllTrades()
             });
     }
@@ -131,66 +149,65 @@ export default class BrokerDashboard extends Component {
                             <th>Buy Price $</th>
 
                             <th>Current Value $</th>
-                            <th>Gain / Loss</th>
-                            <th>Amount To Sell</th>
+                            <th>Gain / Loss $</th>
                             <th>Sell</th>
                         </tr>
                         </thead>
                         <tbody id={"tableBodyPort"}>
                         {
-                            this.state.investments.map(investment => {
-                                    let i = this.state.investments.indexOf(investment)
-                                    return (
-                                        <tr id={"tableRows"}>
-                                            <td>
-                                                {this.state.cryptos[i].data[investment.crypto].name} ({this.state.cryptos[i].data[investment.crypto].symbol})
-                                            </td>
-                                            <td>
-                                                {investment.tokens}
-                                            </td>
-                                            <td>
-                                                {(investment.type === 'PROCESSED' &&
-                                                    '$' + investment.priceWhenBought)
-                                                || '-'}
-                                            </td>
-                                            <td>
-                                                {(investment.type === 'PROCESSED' &&
-                                                    '$' + Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
-                                                || '-'}
-                                            </td>
-                                            <td>
-                                                {(investment.type === 'PROCESSED' &&
-                                                    '$' + (investment.tokens *
-                                                        (Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price) - investment.priceWhenBought)))
-                                                || '-'}
-                                            </td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                                <button type="button"
-                                                        className={"btn btn-success " +
-                                                        ((investment.status === 'PROCESSED') ? 'd-none' : "")}
-                                                        onClick={() => this.buyTrade(investment,
-                                                            Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))}>
-                                                    Buy
-                                                </button>
-                                                <button type="button"
-                                                        className={"btn btn-danger " +
-                                                        ((investment.status === 'PROCESSED') ? 'd-none' : "")}
-                                                        onClick={() => this.cancelTrade(investment)}>
-                                                    Cancel
-                                                </button>
-                                                <button type="button"
-                                                        className={"btn btn-danger " +
-                                                        ((investment.status === 'PENDING') ? 'd-none' : "")}
-                                                        onClick={() => this.sellTrade(investment)}>
-                                                    Sell
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            )
+                            this.state.investments.filter(trade => trade.sold === false)
+                                .map(investment => {
+                                        console.log(investment)
+                                        let i = this.state.investments.indexOf(investment)
+                                        return (
+                                            <tr id={"tableRows"}>
+                                                <td>
+                                                    {this.state.cryptos[i].data[investment.crypto].name} ({this.state.cryptos[i].data[investment.crypto].symbol})
+                                                </td>
+                                                <td>
+                                                    {investment.tokens}
+                                                </td>
+                                                <td>
+                                                    {(investment.status === 'PROCESSED' &&
+                                                        investment.priceWhenBought)
+                                                    || '-'}
+                                                </td>
+                                                <td>
+                                                    {(investment.status === 'PROCESSED' &&
+                                                        Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
+                                                    || '-'}
+                                                </td>
+                                                <td>
+                                                    {(investment.status === 'PROCESSED' &&
+                                                        (investment.tokens *
+                                                            (Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price) - investment.priceWhenBought)))
+                                                    || '-'}
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                            className={"btn btn-success " +
+                                                            ((investment.status === 'PROCESSED') ? 'd-none' : "")}
+                                                            onClick={() => this.buyTrade(investment,
+                                                                Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))}>
+                                                        Buy
+                                                    </button>
+                                                    <button type="button"
+                                                            className={"btn btn-danger " +
+                                                            ((investment.status === 'PROCESSED') ? 'd-none' : "")}
+                                                            onClick={() => this.cancelTrade(investment)}>
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button"
+                                                            className={"btn btn-danger " +
+                                                            ((investment.status === 'PENDING') ? 'd-none' : "")}
+                                                            onClick={() => this.sellTrade(investment)}>
+                                                        Sell
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                )
                         }
                         </tbody>
                     </table>

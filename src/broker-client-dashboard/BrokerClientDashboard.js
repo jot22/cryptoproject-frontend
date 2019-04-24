@@ -86,8 +86,7 @@ export default class BrokerClientDashboard extends Component {
                             <th>
                                 <div>Current Value $</div>
                             </th>
-                            <th>Gain / Loss</th>
-                            <th>Amount To Sell</th>
+                            <th>Gain / Loss $</th>
                             <th>Sell Token</th>
                         </tr>
                         </thead>
@@ -108,18 +107,15 @@ export default class BrokerClientDashboard extends Component {
                                                     {investment.priceWhenBought}
                                                 </td>
                                                 <td>
-                                                    {(investment.type === 'PROCESSED' &&
-                                                        '$' + Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
+                                                    {(investment.status === 'PROCESSED' &&
+                                                        Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
                                                     || '-'}
                                                 </td>
                                                 <td>
-                                                    {(investment.type === 'PROCESSED' &&
-                                                        '$' + (investment.tokens *
+                                                    {(investment.status === 'PROCESSED' &&
+                                                        (investment.tokens *
                                                             (Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price) - investment.priceWhenBought)))
                                                     || '-'}
-                                                </td>
-                                                <td>
-                                                    <input placeholder="Amount To Sell"/>
                                                 </td>
                                                 <td>
                                                     <button type="button"
