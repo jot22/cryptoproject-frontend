@@ -35,46 +35,48 @@ export default class Profile extends React.Component {
         this.setState({
             user: newUser
         })
-    }
+    };
 
     updateLastName = (event) => {
         let newUser = this.state.user;
         newUser.lastName = event.target.value;
         this.setState({
-            lastName: newUser
+            user: newUser
         })
-    }
+    };
     updatePhone = (event) => {
         let newUser = this.state.user;
         newUser.phone = event.target.value;
         this.setState({
-            phoneFld: newUser
+            user: newUser
         })
-    }
+    };
     updateEmail = (event) => {
         let newUser = this.state.user;
         newUser.email = event.target.value;
         this.setState({
-            emailFld: newUser
+            user: newUser
         })
-    }
+    };
     updateWallet = (event) => {
         let newUser = this.state.user;
         newUser.wallet = event.target.value;
         this.setState({
-            wallet: newUser
+            user: newUser
         })
-    }
+    };
 
     updateBroker = (event) => {
-        let newUser = this.state.user;
-        newUser.broker = event.target.value;
-        this.setState(
-            {
-                user: newUser
-            }
-        )
-    }
+        if(event.target.value !== "Select a Broker") {
+            let newUser = this.state.user;
+            newUser.broker = event.target.value;
+            this.setState(
+                {
+                    user: newUser
+                }
+            )
+        }
+    };
 
     getProfile = () => {
         this.userService.profile().then(response => {
@@ -83,15 +85,15 @@ export default class Profile extends React.Component {
                 user: response,
             })
         })
-    }
+    };
 
     updateProfile = () => {
-        console.log(this.state.firstName);
+        console.log(this.state.user.broker)
         this.userService.updateUser(this.state.user._id, this.state.user).then(response => {
                 console.log(response);
             }
         )
-    }
+    };
 
 
     // submitProfileChange() {
@@ -121,30 +123,6 @@ export default class Profile extends React.Component {
     //         }
     //     )
     // };
-
-    // setFirstName(name) {
-    //     this.setState({firstName: name})
-    // };
-    //
-    // setLastName(name) {
-    //     this.setState({lastName: name});
-    // }
-    //
-    // setPhone(phone) {
-    //     this.setState({phoneFld: phone});
-    // }
-    //
-    // setEmail(email) {
-    //     this.setState({emailFld: email});
-    // }
-    //
-    // setRole(role) {
-    //     this.setState({roleFld: role});
-    // }
-    //
-    // setDob(dob) {
-    //     this.setState({dobFld: dob});
-    // }
 
 
     // componentWillMount() {
