@@ -196,13 +196,6 @@ export default class NavBar extends React.Component {
                             <label className="navbar-brand">
                                 <Link to="/" id={"websiteName"}>Piggybank Investing | {this.properRole()}</Link>
                             </label>
-
-                            <label className="navbar-brand " id={"apiHooks"}>
-                                <Link to="/api" className='disabled-link'>API Calls</Link>
-                            </label>
-                            <button onClick={this.getFollowers}>
-                                Profile
-                            </button>
                             <form className="form-inline">
                                 <Link to={'/profileSearch'}>
                                     <button id={"submitButton"}
@@ -215,7 +208,7 @@ export default class NavBar extends React.Component {
                                     <button id={"submitButton"}
                                             className="btn btn-outline-success my-2 my-sm-0"
                                             type="submit">
-                                        Search
+                                        Coin Search
                                     </button>
                                 </Link>
                                 {this.loadButtonsLoggedInNot()}
