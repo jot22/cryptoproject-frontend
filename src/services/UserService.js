@@ -1,5 +1,7 @@
+// let USER_API_URL =
+//     'http://localhost:8080/api/';
 let USER_API_URL =
-    'http://localhost:8080/api/';
+    'https://whispering-spire-33999.herokuapp.com/api/';
 
 
 export default class UserService {

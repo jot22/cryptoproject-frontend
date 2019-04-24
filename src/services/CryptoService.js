@@ -1,5 +1,7 @@
+// let CRYPTO_API_URL =
+//     'http://localhost:8080/api/crypto';
 let CRYPTO_API_URL =
-    'http://localhost:8080/api/crypto';
+    'https://whispering-spire-33999.herokuapp.com/api/crypto';
 
 export default class CryptoService {
     static myInstance = null;

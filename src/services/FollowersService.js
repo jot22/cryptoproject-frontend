@@ -1,5 +1,7 @@
+// let FOLLOW_API_URL =
+//     'http://localhost:8080/api/following';
 let FOLLOW_API_URL =
-    'http://localhost:8080/api/following';
+    'https://whispering-spire-33999.herokuapp.com/api/following';
 
 export default class FollowersService {
     static myInstance = null;
