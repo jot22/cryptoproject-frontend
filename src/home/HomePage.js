@@ -91,6 +91,13 @@ export default class HomePage extends React.Component {
                                 Dual Exchange
                             </button>
                         </Link>
+                        <Link to={'/followers'}>
+                            <button type={'button'}
+                                    id={"portfolioButtonBottom"}
+                                    className={'btn btn-primary btn-block'}>
+                                Following
+                            </button>
+                        </Link>
                     </div>
                 );
                 buffer.push(
@@ -125,6 +132,13 @@ export default class HomePage extends React.Component {
                                     id={"portfolioButtonBottom"}
                                     className={'btn btn-primary btn-block'}>
                                 Dual Exchange
+                            </button>
+                        </Link>
+                        <Link to={'/followers'}>
+                            <button type={'button'}
+                                    id={"portfolioButtonBottom"}
+                                    className={'btn btn-primary btn-block'}>
+                                Following
                             </button>
                         </Link>
                     </div>
