@@ -14,6 +14,7 @@ import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashbo
 import UserService from "../services/UserService";
 import Followers from "../followers/Followers";
 import FollowersService from "../services/FollowersService";
+import ReadOnlyProfile from "../read-only-profile/ReadOnlyProfile";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -200,9 +201,6 @@ export default class NavBar extends React.Component {
                                 Profile
                             </button>
                             <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search"
-                                       aria-label="Search"
-                                       onChange={this.searchInputChanged}/>
                                 <Link to={'/search'}>
                                     <button id={"submitButton"}
                                             className="btn btn-outline-success my-2 my-sm-0"
@@ -227,6 +225,9 @@ export default class NavBar extends React.Component {
                                    setUser={this.setUser}/>}/>
                         <Route path="/profile" exact
                                render={() => <Profile/>}/>
+                        <Route path='/profile/:id'
+                               exact
+                               component={ReadOnlyProfile}/>
                         <Route path="/api" exact
                                render={() => <Api/>}/>
                         <Route path={'/details/:symbol'}
@@ -239,6 +240,8 @@ export default class NavBar extends React.Component {
                                render={() => <BrokerClientDashboard/>}/>
                         <Route path={'/brokerPortfolio'}
                                render={() => <BrokerDashboard/>}/>
+                        <Route path={'/search/'} exact
+                               component={Search}/>
                         <Route path={'/search/:criteria'}
                                component={Search}/>
                     </div>

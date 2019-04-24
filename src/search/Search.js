@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './Search.css'
 import CoinMarketService from "../services/CoinMarketService";
 
@@ -7,25 +7,20 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.coinMarketService = CoinMarketService.getInstance();
+        this.searchTerm = props.match.params.criteria;
         this.state = {
             results: [],
-            searchInput: ""
-        }
+            routeSearch: false,
+            searchInput: props.match.params.criteria
+        };
+        this.search();
     }
 
-    // componentDidMount() {
-    //     console.log(this.props.match.params.criteria)
-    //     // this.coinMarketService.findAllCrypto().then(results => {
-    //     //         console.log(results)
-    //     //         this.setState({
-    //     //             results: results.data.filter(coin =>
-    //     //                 ((coin.name.toLowerCase()).includes(this.state.searchInput) ||
-    //     //                     this.state.searchInput.includes((coin.name.toLowerCase())) ||
-    //     //                     coin.symbol.toLowerCase() === this.state.searchInput))
-    //     //         })
-    //     //     }
-    //     // )
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.match.params.criteria !== this.props.match.params.criteria){
+            this.search();
+        }
+    }
 
     searchInputChanged = (event) => {
         this.setState(
@@ -36,20 +31,25 @@ export default class Search extends Component {
     };
 
     search = () => {
-        console.log(this.state.searchInput)
-        this.coinMarketService.findAllCrypto().then(results => {
-                console.log(results)
-                this.setState({
-                    results: results.data.filter(coin =>
-                        ((coin.name.toLowerCase()).includes(this.state.searchInput) ||
-                            this.state.searchInput.includes((coin.name.toLowerCase())) ||
-                            coin.symbol.toLowerCase() === this.state.searchInput))
-                })
-            }
-        )
-    }
+        if (this.state.searchInput) {
+            this.coinMarketService.findAllCrypto().then(results => {
+                    this.setState({
+                        results: results.data.filter(coin =>
+                            ((coin.name.toLowerCase()).includes(this.state.searchInput) ||
+                                this.state.searchInput.includes((coin.name.toLowerCase())) ||
+                                coin.symbol.toLowerCase() === this.state.searchInput))
+                    })
+                }
+            )
+        }
+    };
 
     render() {
+        if (this.state.routeSearch === true) {
+            let url = '/search/' + this.state.searchInput;
+            return <Redirect to={url}/>
+        }
+
         return (
             <div id={"mainSearchContainer"}>
                 <input placeholder={'Search'}
@@ -59,7 +59,10 @@ export default class Search extends Component {
                 <button id={"submitButton"}
                         className="btn btn-primary my-2 my-sm-0"
                         type="submit"
-                        onClick={() => this.search()}>
+                        onClick={() => {
+                            let url = '/search/' + this.state.searchInput;
+                            this.props.history.push(url)
+                        }}>
                     Search
                 </button>
                 <h1 id={"searchHeader"}>Search Results</h1>

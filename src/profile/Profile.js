@@ -94,57 +94,7 @@ export default class Profile extends React.Component {
             }
         )
     };
-
-
-    // submitProfileChange() {
-    //     let formatJSON = {
-    //         id: 5
-    //         , username: "a"
-    //         , firstName: this.state.firstName
-    //         , lastName: this.state.lastName
-    //         , password: "f"
-    //         , role: this.state.roleFld
-    //         , email: this.state.emailFld
-    //         , dob: this.state.dobFld
-    //         , phone: this.state.phoneFld
-    //     };
-    //     this.state.service.updateUser(formatJSON).then(
-    //         (resp) => resp.json()).then(
-    //         (e) => {
-    //             this.setState({
-    //                 user: e,
-    //                 renderSuc: true,
-    //                 firstName: '',
-    //                 lastName: '',
-    //                 phoneFld: '',
-    //                 emailFld: ''
-    //
-    //             })
-    //         }
-    //     )
-    // };
-
-
-    // componentWillMount() {
-    //     let userService = new UserService();
-    //     userService.profile().then((target) => {
-    //         this.checkLogin(target)
-    //     }).catch(() => console.log("FF"));
-    // }
-
-
-    // renderSuccess() {
-    //     let buffer = [];
-    //     if (this.state.renderSuc) {
-    //         buffer.push(
-    //             <div className="alert alert-success" role="alert">
-    //                 Profile successfully saved
-    //             </div>
-    //         )
-    //     }
-    //     return buffer;
-    //
-    // }
+    
 
     loadInvestorOnly = () => {
         let buffer = [];
