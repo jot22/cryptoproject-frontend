@@ -13,11 +13,13 @@ import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
 import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
 import UserService from "../services/UserService";
 import Followers from "../followers/Followers";
+import FollowersService from "../services/FollowersService";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
+        this.follorService = FollowersService.getInstance();
         this.topTicker = React.createRef();
         this.state = {
             user: {},
@@ -160,6 +162,17 @@ export default class NavBar extends React.Component {
         this.userService.profile().then(response => console.log(response))
     };
 
+    getFollowers = () => {
+        console.log(this.state.user._id);
+        this.follorService.findFollowingByUserId(this.state.user._id).then(response => {
+            console.log(response);
+            this.follorService.deleteFromFollowing(this.state.user._id, response, '5cbe4e957957784bec7e56df', '5cbfae721371f637c8b73491')
+                .then(newResponse => {
+                    console.log(newResponse);
+                })
+        });
+    };
+
     logout = () => {
         this.userService.logout().then(response =>
             this.setState({user: {type: 'GUEST'}}))
@@ -183,7 +196,7 @@ export default class NavBar extends React.Component {
                             <label className="navbar-brand " id={"apiHooks"}>
                                 <Link to="/api" className='disabled-link'>API Calls</Link>
                             </label>
-                            <button onClick={this.getProfile}>
+                            <button onClick={this.getFollowers}>
                                 Profile
                             </button>
                             <form className="form-inline">
