@@ -2,11 +2,13 @@ import React from 'react'
 import './ReadOnlyProfile.css'
 import {Link} from "react-router-dom";
 import UserService from "../services/UserService";
+import FollowersService from "../services/FollowersService";
 
 export default class ReadOnlyProfile extends React.Component {
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
+        this.followService = FollowersService.getInstance();
 
         this.profileId = props.match.params.id;
         this.state = {
@@ -31,6 +33,17 @@ export default class ReadOnlyProfile extends React.Component {
         });
 
 
+    }
+
+    followUser(found) {
+        this.userService.profile().then(response => {
+            console.log(response._id)
+            console.log(found)
+            this.followService.findFollowingByUserId(response._id).then(following => {
+                this.followService.addToFollowing(response._id, following, found._id, following._id).then(verify =>
+                    console.log(verify));
+            })
+        })
     }
 
     render() {
@@ -73,7 +86,8 @@ export default class ReadOnlyProfile extends React.Component {
                             <div className="col-sm-7">
                                 <a style={{textDecoration: 'none'}}>
                                     <button type={"button"}
-                                            className={"btn btn-success btn-block"}>
+                                            className={"btn btn-success btn-block"}
+                                            onClick={() => this.followUser(this.state.userFound)}>
                                         Following
                                     </button>
                                 </a>
