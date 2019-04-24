@@ -1,0 +1,13 @@
+#brokerHeader{
+    color: white;
+    font-size: 3.7em;
+    font-family: Consolas, serif;
+    font-weight: 900;
+    border-bottom: 3px solid red;
+    max-width: 620px;
+}
+
+#mainBrokerDashContainer{
+    color: white;
+    font-family: Consolas, serif;
+}
