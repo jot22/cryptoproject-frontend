@@ -23,7 +23,6 @@ export default class BrokerService {
 
     updateTrade = (tradeId, trade) => {
         return fetch(INVEST_API_URL + "trade/" + tradeId, {
-            credentials: "include",
             method: 'put',
             body: JSON.stringify(trade),
             headers: {
@@ -31,6 +30,18 @@ export default class BrokerService {
             }
         }).then(response =>
             response.json());
+    };
+
+    deleteTrade = (tradeId, trade) => {
+        return fetch(INVEST_API_URL + 'trade/' + tradeId, {
+                method: 'delete',
+                body: JSON.stringify(trade),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }
+        )
+            .then(response => response.json());
     }
 
 }

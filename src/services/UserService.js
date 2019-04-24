@@ -20,6 +20,10 @@ export default class UserService {
         }).then(response =>
             response.json());
 
+    findUserById = (uid) =>
+        fetch(USER_API_URL + 'user/' + uid)
+            .then(response => response.json());
+
     login = (user) => {
         return fetch(USER_API_URL + "login", {
             credentials: 'include',
@@ -31,7 +35,7 @@ export default class UserService {
         }).then(response =>
             response.json())
             .catch(() => alert("Wrong username/password combination"));
-    }
+    };
 
 
     logout = () => {
@@ -42,7 +46,7 @@ export default class UserService {
                 'content-type': 'application/json'
             }
         })
-    }
+    };
 
     profile = () => {
         return fetch(USER_API_URL + "profile", {

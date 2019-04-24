@@ -2,6 +2,8 @@ import React from 'react';
 
 import TradingViewWidget from 'react-tradingview-widget';
 import UserService from "../services/UserService";
+import {Link} from "react-router-dom";
+import TradingViewGraph from '../trading-view/TradingViewGraph'
 
 
 //Figured out how to embed the TradingView widget from here,
@@ -11,6 +13,8 @@ import UserService from "../services/UserService";
 // https://www.npmjs.com/package/react-tradingview-widget
 
 export default class HomePage extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
@@ -20,36 +24,93 @@ export default class HomePage extends React.Component {
         }
     }
 
-    loadChart(ticker) {
-        this.setState({ticker: ticker})
-    }
 
     loadCorrectContent = () => {
         let role = '';
-        if (this.props.user.type === 'BROKER' || this.props.user.type === 'INVESTOR') {
+        if (this.props.user.type === 'BROKER') {
+            role = 'broker';
+        }
+        if (this.props.user.type === 'INVESTOR') {
             role = 'member';
         }
+
+        console.log("ROLE: "+role);
+
         let buffer = [];
         switch (role) {
             case "member":
                 buffer.push(
                     <div className={"col-3"} id={"leftPanel"}>
-                        <h3 id={"selectInstrument"}>Portfolio Value</h3>
-                        <h4 id={"portfolioValue"}>$4500</h4>
+                        <h3 id={"selectInstrument"}>At A Glance</h3>
+                        <h6 id={"portfolioValue"}>Portfolio Value: $4500</h6>
+                        <h6 id={"portfolioValue"}>Managed By: Tom</h6>
                         <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
-                        <span onClick={() => this.loadChart("COINBASE:BTCUSD")}>
-                        <i className="fab fa-bitcoin" id={"bitcoin"}><label
-                            id={"forBitcoin"}>Bitcoin</label></i>
-                    </span>
-                        <span onClick={() => this.loadChart("COINBASE:ETHUSD")}>
-                        <i className="fab fa-ethereum" id={"bitcoin"}><label id={"forEthereum"}>Ethereum</label></i>
-                    </span>
-                        <span onClick={() => this.loadChart("BITFINEX:XMRUSD")}>
-                        <i className="fab fa-monero" id={"bitcoin"}><label id={"forMonero"}>Monero</label></i>
-                    </span>
-                        <span onClick={() => this.loadChart("COINBASE:XRPUSD")}>
-                        <i className="fas fa-coins" id={"bitcoin"}><label id={"forRipple"}>Ripple</label></i>
-                    </span>
+                        <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
+                        <select className={'form-control'} onChange={(m) => {
+                            this.setState({ticker: m.target.value})
+                        }}>
+                            <option value={"COINBASE:BTCUSD"}>
+                                Bitcoin
+                            </option>
+                            <option value={"COINBASE:ETHUSD"}>
+                                Ethereum
+                            </option>
+                            <option value={"BITFINEX:XMRUSD"}>
+                                Monero
+                            </option>
+                            <option value={"COINBASE:XRPUSD"}>
+                                Ripple
+                            </option>
+                        </select>
+                        <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
+                        <Link to={'/followers'}>
+                            <button type={'button'}
+                                    id={"portfolioButton"}
+                                    className={'btn btn-primary btn-block'}>
+                                Portfolio
+                            </button>
+                        </Link>
+                    </div>
+                );
+                buffer.push(
+                    <div className={"col-9"} id={"rightPanel"}>
+                        <TradingViewGraph/>
+                    </div>
+                );
+                return buffer;
+                break;
+            case "broker":
+                buffer.push(
+                    <div className={"col-3"} id={"leftPanel"}>
+                        <h3 id={"selectInstrument"}>At A Glance</h3>
+                        <h6 id={"portfolioValue"}>Clients Managed: 34</h6>
+                        <h6 id={"portfolioValue"}>Overall Performance: 25%</h6>
+                        <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
+                        <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
+                        <select className={'form-control'} onChange={(m) => {
+                            this.setState({ticker: m.target.value})
+                        }}>
+                            <option value={"COINBASE:BTCUSD"}>
+                                Bitcoin
+                            </option>
+                            <option value={"COINBASE:ETHUSD"}>
+                                Ethereum
+                            </option>
+                            <option value={"BITFINEX:XMRUSD"}>
+                                Monero
+                            </option>
+                            <option value={"COINBASE:XRPUSD"}>
+                                Ripple
+                            </option>
+                        </select>
+                        <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
+                        <Link to={'/brokerPortfolio'}>
+                            <button type={'button'}
+                                    id={"portfolioButton"}
+                                    className={'btn btn-primary btn-block'}>
+                                Portfolios
+                            </button>
+                        </Link>
                     </div>
                 );
                 buffer.push(
@@ -62,11 +123,7 @@ export default class HomePage extends React.Component {
                                            news={["headlines"]}/>
                     </div>
                 );
-                break;
-            case "broker":
-                buffer.push(
-
-                );
+                return buffer;
                 break;
             default:
                 buffer.push(
@@ -86,6 +143,9 @@ export default class HomePage extends React.Component {
     };
 
     render() {
+        if(this.props.user === null){
+            return null;
+        }
         return (
             <div className={"row flex-grow-1"} id={"mainContentContain"}>
                 {this.loadCorrectContent()}

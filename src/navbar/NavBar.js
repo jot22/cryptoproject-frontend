@@ -12,6 +12,7 @@ import Search from "../search/Search";
 import BrokerDashboard from "../broker-dashboard/BrokerDashboard";
 import BrokerClientDashboard from "../broker-client-dashboard/BrokerClientDashboard";
 import UserService from "../services/UserService";
+import Followers from "../followers/Followers";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export default class NavBar extends React.Component {
             searchInput: ""
         };
     }
+
 
     componentDidMount() {
         this.userService.profile().then(
@@ -88,21 +90,23 @@ export default class NavBar extends React.Component {
             );
             if (this.state.user.type === 'INVESTOR') {
                 buffer.push(
-                    <Link to={'/portfolio'}>
+                    <Link to={'/'}>
                         <button type={'button'}
                                 id={"portfolioButton"}
-                                className={'btn btn-primary'}>
-                            Portfolio
+                                className={'btn btn-primary'}
+                                onClick={this.logout}>
+                            Log Out
                         </button>
                     </Link>
                 )
             } else {
                 buffer.push(
-                    <Link to={'/brokerPortfolio'}>
+                    <Link to={'/'}>
                         <button type={'button'}
                                 id={"portfolioButton"}
-                                className={'btn btn-primary'}>
-                            Portfolios
+                                className={'btn btn-primary'}
+                                onClick={this.logout}>
+                            Log Out
                         </button>
                     </Link>
                 )
@@ -182,11 +186,6 @@ export default class NavBar extends React.Component {
                             <button onClick={this.getProfile}>
                                 Profile
                             </button>
-                            <Link to={'/'}>
-                                <button onClick={this.logout}>
-                                    Logout
-                                </button>
-                            </Link>
                             <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search"
                                        aria-label="Search"
@@ -220,6 +219,9 @@ export default class NavBar extends React.Component {
                         <Route path={'/details/:symbol'}
                                exact
                                component={Details}/>
+                        <Route path={'/followers'}
+                               exact
+                               component={Followers}/>
                         <Route path={'/portfolio'}
                                render={() => <BrokerClientDashboard/>}/>
                         <Route path={'/brokerPortfolio'}

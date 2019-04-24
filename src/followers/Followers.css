@@ -3,13 +3,13 @@
     padding: 10px 35px 20px;
 }
 
-#followerHeader {
+#brokerHeader {
     color: white;
-    font-size: 2.7em;
+    font-size: 3.7em;
     font-family: Consolas, serif;
     font-weight: 900;
     border-bottom: 3px solid red;
-    max-width: 555px;
+    max-width: 535px;
 }
 
 #selectLabel{
