@@ -13,7 +13,9 @@ export default class Followers extends Component {
             following: [],
             firstNames: [],
             all: {},
-            fName: []
+            fName: [],
+            lName: [],
+            brokerName: []
         }
     }
 
@@ -21,7 +23,8 @@ export default class Followers extends Component {
 
         this.follorService.findFollowingByUserId();
         let userNames = [];
-
+        let lastNames = [];
+        let brokerName = [];
         this.userService.profile().then(response => {
             let id = response._id;
             this.follorService.findFollowingByUserId(id).then(follows => {
@@ -30,10 +33,21 @@ export default class Followers extends Component {
             }).then(() => {
                     this.state.all.following.map(user => {
                         this.userService.findUserById(user).then(out => {
-                                userNames.push(out.username);
+                                userNames.push(out.firstName);
+                                lastNames.push(out.lastName);
+                                this.userService.findUserById(out.broker).then(broker =>
+                                    brokerName.push(broker.firstName)
+                                ).then(() =>
+                                    this.setState({
+                                        brokerName: brokerName
+                                    })
+                                )
                             }
                         ).then(() =>
-                            this.setState({fName: userNames})
+                            this.setState({
+                                fName: userNames,
+                                lName: lastNames
+                            })
                         )
 
                     })
@@ -41,40 +55,43 @@ export default class Followers extends Component {
                 }
             )
         });
-
-
-
-        let users = [];
-        this.userService.profile().then(response => {
-            this.follorService.findFollowingByUserId(response._id).then(newResponse => {
-                users = newResponse.following;
-                console.log(users);
-                this.setState({
-                    user: response,
-                    following: users
-                })
-            })
-        })
     }
 
-    getListOfFirstNames() {
-        let users = [];
-        this.userService.profile().then(response => {
-            this.follorService.findFollowingByUserId(response._id).then(newResponse => {
-                console.log(newResponse.following);
-                users = newResponse.following;
-                newResponse.following.map(user =>
-                    this.userService.findUserById(user).then(newestResponse => {
+    renderComp = () => {
+        let buffer = [];
+        this.state.fName.map(user => {
 
-                    })
-                );
-            });
-            this.setState({
-                user: response
-            })
-        })
+            buffer.push(
+                <td id={"tableRows"}>
+                    {user}
+                </td>
+            )
+        });
+        return buffer;
+
+    };
+
+
+    renderAll = () => {
+        let buffer = [];
+        for(let a =0; a< this.state.fName.length;a++){
+            buffer.push(
+                <tr>
+                    <td id={"tableRows"}>
+                        {this.state.fName[a]}
+                    </td>
+                    <td id={"tableRows"}>
+                        {this.state.lName[a]}
+                    </td>
+                    <td id={"tableRows"}>
+                        {this.state.brokerName[a]}
+                    </td>
+                </tr>
+            )
+
+        }
+        return buffer;
     }
-
 
     render() {
 
@@ -94,23 +111,8 @@ export default class Followers extends Component {
                         </tr>
                         </thead>
                         <tbody id={"tableBodyPort"}>
-                        {
-                            this.state.fName.map(user => {
-                                // let i = this.state.following.indexOf(user)
-                                // console.log(user);
-                                // let firstName = '';
-                                // return this.userService.findUserById(this.state.following[i]).then(userIdea =>
-                                //     console.log(userIdea)
-                                // );
-                                console.log(user);
-                                return (
+                        {this.renderAll()}
 
-                                    <tr id={"tableRows"}>
-                                        {user}
-                                    </tr>
-                                )
-                            })
-                        }
                         </tbody>
                     </table>
                 </div>
