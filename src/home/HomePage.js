@@ -77,7 +77,7 @@ export default class HomePage extends React.Component {
                         <h3 id={"selectInstrument"}>At A Glance</h3>
                         <h6 id={"portfolioValue"}>Managed By: {this.state.broker.firstName}</h6>
                         <h3 id={"selectInstrumentBottom"}>View Dashboard</h3>
-                        <Link to={'/followers'}>
+                        <Link to={'/portfolio'}>
                             <button type={'button'}
                                     id={"portfolioButton"}
                                     className={'btn btn-primary btn-block'}>
