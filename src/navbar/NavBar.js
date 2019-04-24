@@ -15,6 +15,8 @@ import UserService from "../services/UserService";
 import Followers from "../followers/Followers";
 import FollowersService from "../services/FollowersService";
 import ReadOnlyProfile from "../read-only-profile/ReadOnlyProfile";
+import ProfileSearch from "../profile-search/ProfileSearch";
+import DualExchange from "../dual-exchange/DualExchange";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -201,6 +203,13 @@ export default class NavBar extends React.Component {
                                 Profile
                             </button>
                             <form className="form-inline">
+                                <Link to={'/profileSearch'}>
+                                    <button id={"submitButton"}
+                                            className="btn btn-outline-success my-2 my-sm-0"
+                                            type="submit">
+                                        Profile Search
+                                    </button>
+                                </Link>
                                 <Link to={'/search'}>
                                     <button id={"submitButton"}
                                             className="btn btn-outline-success my-2 my-sm-0"
@@ -244,6 +253,13 @@ export default class NavBar extends React.Component {
                                component={Search}/>
                         <Route path={'/search/:criteria'}
                                component={Search}/>
+                        <Route path={'/profileSearch/'} exact
+                               component={ProfileSearch}/>
+                        <Route path={'/profileSearch/:criteria'} exact
+                               component={ProfileSearch}/>
+                        <Route path={'/dualExchange'} exact
+                               component={DualExchange}/>
+
                     </div>
                     <Footer/>
                 </div>

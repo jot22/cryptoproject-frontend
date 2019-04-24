@@ -109,14 +109,11 @@ export default class HomePage extends React.Component {
                     <div className={"col-9"} id={"rightPanel"}>
                         <div id={"newPanel"}>
                             <h1 id={"marketOver"}>Market Overview</h1>
-                            <h6>Currencies: </h6>
-                            {this.state.globalMetrics.data.active_cryptocurrencies}
-                            <h6>Market Cap: </h6>
-                            {this.state.globalMetrics.data.quote.USD.total_market_cap}
-                            <h6>24 Hour Volume: </h6>
-                            {this.state.globalMetrics.data.quote.USD.total_volume_24h}
-                            <h6>BTC Dominance: </h6>
-                            {this.state.globalMetrics.data.btc_dominance}
+                            <h6>Total Coins: {this.state.globalMetrics.data.active_cryptocurrencies}</h6>
+                            <h6>Market Cap: ${this.state.globalMetrics.data.quote.USD.total_market_cap}</h6>
+                            <h6>24 Hour Volume: ${this.state.globalMetrics.data.quote.USD.total_volume_24h}</h6>
+                            <h6>BTC Dominance: {this.state.globalMetrics.data.btc_dominance}%</h6>
+
                         </div>
                     </div>
                 );
@@ -160,14 +157,10 @@ export default class HomePage extends React.Component {
                     <div className={"col-9"} id={"rightPanel"}>
                         <div id={"newPanel"}>
                             <h1 id={"marketOver"}>Market Overview</h1>
-                            <h6>Currencies: </h6>
-                            {this.state.globalMetrics.data.active_cryptocurrencies}
-                            <h6>Market Cap: </h6>
-                            {this.state.globalMetrics.data.quote.USD.total_market_cap}
-                            <h6>24 Hour Volume: </h6>
-                            {this.state.globalMetrics.data.quote.USD.total_volume_24h}
-                            <h6>BTC Dominance: </h6>
-                            {this.state.globalMetrics.data.btc_dominance}
+                            <h6>Total Coins: {this.state.globalMetrics.data.active_cryptocurrencies}</h6>
+                            <h6>Market Cap: ${this.state.globalMetrics.data.quote.USD.total_market_cap}</h6>
+                            <h6>24 Hour Volume: ${this.state.globalMetrics.data.quote.USD.total_volume_24h}</h6>
+                            <h6>BTC Dominance: {this.state.globalMetrics.data.btc_dominance}%</h6>
                         </div>
                     </div>
                 );
