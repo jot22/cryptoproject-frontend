@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import ap from './ap.png'
 import jt from './jt.jpg'
 import jr from './jr.jpg'
+import CoinMarketService from "../services/CoinMarketService";
 
 
 //Figured out how to embed the TradingView widget from here,
@@ -18,12 +19,43 @@ export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.userService = UserService.getInstance();
+        this.coinMarketService = CoinMarketService.getInstance();
         this.state = {
+            broker: {firstName: "Not Managed"},
             user: {},
-            ticker: 'COINBASE:BTCUSD'
+            ticker: 'COINBASE:BTCUSD',
+            globalMetrics: {
+                data: {
+                    active_cryptocurrencies: 0,
+                    btc_dominance: 0,
+                    quote: {
+                        USD: {
+                            total_market_cap: 0,
+                            total_volume_24h: 0
+                        }
+                    }
+                }
+            }
         }
     }
 
+    componentDidMount() {
+        this.userService.profile().then(user => {
+            if (user.broker) {
+                this.userService.findUserById(user.broker)
+                    .then(broker =>
+                        this.setState({broker: broker}))
+            } else {
+                this.setState({
+                    broker: {
+                        firstName: "Not Managed"
+                    }
+                })
+            }
+        })
+        this.coinMarketService.getGlobalMetrics().then(metrics =>
+            this.setState({globalMetrics: metrics}))
+    }
 
 
     loadCorrectContent = () => {
@@ -44,7 +76,7 @@ export default class HomePage extends React.Component {
                     <div className={"col-3"} id={"leftPanel"}>
                         <h3 id={"selectInstrument"}>At A Glance</h3>
                         <h6 id={"portfolioValue"}>Portfolio Value: $4500</h6>
-                        <h6 id={"portfolioValue"}>Managed By: Tom</h6>
+                        <h6 id={"portfolioValue"}>Managed By: {this.state.broker.firstName}</h6>
                         <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
                         <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
                         <select className={'form-control'} onChange={(m) => {
@@ -78,9 +110,13 @@ export default class HomePage extends React.Component {
                         <div id={"newPanel"}>
                             <h1 id={"marketOver"}>Market Overview</h1>
                             <h6>Currencies: </h6>
+                            {this.state.globalMetrics.data.active_cryptocurrencies}
                             <h6>Market Cap: </h6>
+                            {this.state.globalMetrics.data.quote.USD.total_market_cap}
                             <h6>24 Hour Volume: </h6>
+                            {this.state.globalMetrics.data.quote.USD.total_volume_24h}
                             <h6>BTC Dominance: </h6>
+                            {this.state.globalMetrics.data.btc_dominance}
                         </div>
                     </div>
                 );
@@ -125,9 +161,13 @@ export default class HomePage extends React.Component {
                         <div id={"newPanel"}>
                             <h1 id={"marketOver"}>Market Overview</h1>
                             <h6>Currencies: </h6>
+                            {this.state.globalMetrics.data.active_cryptocurrencies}
                             <h6>Market Cap: </h6>
+                            {this.state.globalMetrics.data.quote.USD.total_market_cap}
                             <h6>24 Hour Volume: </h6>
+                            {this.state.globalMetrics.data.quote.USD.total_volume_24h}
                             <h6>BTC Dominance: </h6>
+                            {this.state.globalMetrics.data.btc_dominance}
                         </div>
                     </div>
                 );
