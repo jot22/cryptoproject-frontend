@@ -83,7 +83,7 @@ export default class HomePage extends React.Component {
                 buffer.push(
                     <div className={"col-3"} id={"leftPanel"}>
                         <h3 id={"selectInstrument"}>At A Glance</h3>
-                        <h6 id={"portfolioValue"}>Clients Managed: 34</h6>
+                        <h6 id={"portfolioValue"}>Clients Managed: {this.props.user.clients.length}</h6>
                         <h6 id={"portfolioValue"}>Overall Performance: 25%</h6>
                         <h3 id={"selectInstrument"}>Main Pairs / USD</h3>
                         <h6 id={"portfolioValue"}>Select Graph Instrument</h6>
