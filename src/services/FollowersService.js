@@ -27,16 +27,16 @@ export default class FollowersService {
     findFollowingByUserId = (fid) => {
         let user = {
             user: fid
-        }
+        };
         return fetch(FOLLOW_API_URL + '/' + fid + '/user', {
             credentials: 'include',
             method: 'PUT',
-            body: JSON.stringify(user),
+            body: JSON.stringify({user:fid}),
             headers: {
                 'content-Type': 'application/json'
             }
         }).then(response => response.json());
-    }
+    };
 
     addToFollowing = (userId, following, newFollow, fid) => {
         let newFollowing = {

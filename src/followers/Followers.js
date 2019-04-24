@@ -11,11 +11,39 @@ export default class Followers extends Component {
         this.state = {
             user: {},
             following: [],
-            firstNames: []
+            firstNames: [],
+            all: {},
+            fName: []
         }
     }
 
     componentDidMount() {
+
+        this.follorService.findFollowingByUserId();
+        let userNames = [];
+
+        this.userService.profile().then(response => {
+            let id = response._id;
+            this.follorService.findFollowingByUserId(id).then(follows => {
+                this.setState({all: follows});
+                //console.log("HIT:" + JSON.stringify(follows));
+            }).then(() => {
+                    this.state.all.following.map(user => {
+                        this.userService.findUserById(user).then(out => {
+                                userNames.push(out.username);
+                            }
+                        ).then(() =>
+                            this.setState({fName: userNames})
+                        )
+
+                    })
+
+                }
+            )
+        });
+
+
+
         let users = [];
         this.userService.profile().then(response => {
             this.follorService.findFollowingByUserId(response._id).then(newResponse => {
@@ -49,6 +77,7 @@ export default class Followers extends Component {
 
 
     render() {
+
         return (
             <div id={"mainBrokerDashContainer"}>
                 <h1 id={"followerHeader"}>
@@ -66,18 +95,20 @@ export default class Followers extends Component {
                         </thead>
                         <tbody id={"tableBodyPort"}>
                         {
-                            this.state.following.map(user => {
+                            this.state.fName.map(user => {
                                 // let i = this.state.following.indexOf(user)
                                 // console.log(user);
                                 // let firstName = '';
                                 // return this.userService.findUserById(this.state.following[i]).then(userIdea =>
                                 //     console.log(userIdea)
                                 // );
+                                console.log(user);
                                 return (
+
                                     <tr id={"tableRows"}>
                                         {user}
                                     </tr>
-                                    )
+                                )
                             })
                         }
                         </tbody>
