@@ -17,6 +17,7 @@ import FollowersService from "../services/FollowersService";
 import ReadOnlyProfile from "../read-only-profile/ReadOnlyProfile";
 import ProfileSearch from "../profile-search/ProfileSearch";
 import DualExchange from "../dual-exchange/DualExchange";
+import FollowersParam from "../followersParam/FollowersParam";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -257,6 +258,8 @@ export default class NavBar extends React.Component {
                                component={ProfileSearch}/>
                         <Route path={'/profileSearch/:criteria'} exact
                                component={ProfileSearch}/>
+                        <Route path={'/followers/:name'} exact
+                               component={FollowersParam}/>
                         <Route path={'/dualExchange'} exact
                                component={DualExchange}/>
 

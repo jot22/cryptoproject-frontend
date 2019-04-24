@@ -24,6 +24,10 @@ export default class UserService {
         fetch(USER_API_URL + 'user/' + uid)
             .then(response => response.json());
 
+    findUserByUsername = (name) =>
+        fetch(USER_API_URL + 'user/username/' + name)
+            .then(response => response.json());
+
     login = (user) => {
         return fetch(USER_API_URL + "login", {
             credentials: 'include',
