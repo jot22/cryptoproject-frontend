@@ -1,9 +1,9 @@
 import React from 'react';
-
-import TradingViewWidget from 'react-tradingview-widget';
 import UserService from "../services/UserService";
 import {Link} from "react-router-dom";
-import TradingViewGraph from '../trading-view/TradingViewGraph'
+import ap from './ap.png'
+import jt from './jt.jpg'
+import jr from './jr.jpg'
 
 
 //Figured out how to embed the TradingView widget from here,
@@ -25,6 +25,7 @@ export default class HomePage extends React.Component {
     }
 
 
+
     loadCorrectContent = () => {
         let role = '';
         if (this.props.user.type === 'BROKER') {
@@ -34,7 +35,7 @@ export default class HomePage extends React.Component {
             role = 'member';
         }
 
-        console.log("ROLE: "+role);
+        console.log("ROLE: " + role);
 
         let buffer = [];
         switch (role) {
@@ -74,7 +75,13 @@ export default class HomePage extends React.Component {
                 );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>
-                        <TradingViewGraph/>
+                        <div id={"newPanel"}>
+                            <h1 id={"marketOver"}>Market Overview</h1>
+                            <h6>Currencies: </h6>
+                            <h6>Market Cap: </h6>
+                            <h6>24 Hour Volume: </h6>
+                            <h6>BTC Dominance: </h6>
+                        </div>
                     </div>
                 );
                 return buffer;
@@ -115,12 +122,13 @@ export default class HomePage extends React.Component {
                 );
                 buffer.push(
                     <div className={"col-9"} id={"rightPanel"}>
-                        <TradingViewWidget symbol={this.state.ticker}
-                                           autosize={"true"}
-                                           theme={"dark"}
-                                           hide_top_toolbar={"true"}
-                                           toolbar_bg={"rgba(23, 32, 40, 1)"}
-                                           news={["headlines"]}/>
+                        <div id={"newPanel"}>
+                            <h1 id={"marketOver"}>Market Overview</h1>
+                            <h6>Currencies: </h6>
+                            <h6>Market Cap: </h6>
+                            <h6>24 Hour Volume: </h6>
+                            <h6>BTC Dominance: </h6>
+                        </div>
                     </div>
                 );
                 return buffer;
@@ -128,12 +136,33 @@ export default class HomePage extends React.Component {
             default:
                 buffer.push(
                     <div className={"col-12"} id={"rightPanel"}>
-                        <TradingViewWidget symbol={this.state.ticker}
-                                           autosize={"true"}
-                                           theme={"dark"}
-                                           hide_top_toolbar={"true"}
-                                           toolbar_bg={"rgba(23, 32, 40, 1)"}
-                                           news={["headlines"]}/>
+                        <div id={"guestBox"}>
+                            <h4 id={"guestHeader"}>Welcome to Piggybank Investments</h4>
+                            <p id={"guestBlurb"}>Hello. We are the Piggybank Investing Company.
+
+                                We're a couple of young guys that are into cryptocurrencies and making web apps!
+
+                                We hope you enjoy our virtual cryptocurrency trading application and get some good
+                                practice
+                                as an investor, or even a broker.
+
+                                Thank you for your support!</p>
+                            <h5>Founders</h5>
+                            <div className={"row"} id={"pictureBox"}>
+                                <div className="d-flex flex-column">
+                                    <label>Atanas</label>
+                                    <img src={ap} alt={"Atanas"}/>
+                                </div>
+                                <div className="d-flex flex-column">
+                                    <label>JT</label>
+                                    <img src={jt} alt={"JT"}/>
+                                </div>
+                                <div className="d-flex flex-column">
+                                    <label>Jerry - He Runs</label>
+                                    <img src={jr} alt={"Jerry - He Runs"}/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 );
 
@@ -143,7 +172,7 @@ export default class HomePage extends React.Component {
     };
 
     render() {
-        if(this.props.user === null){
+        if (this.props.user === null) {
             return null;
         }
         return (
