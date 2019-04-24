@@ -3,6 +3,7 @@ import './BrokerClientDashboard.css'
 import UserService from "../services/UserService";
 import InvestorService from "../services/InvestorService";
 import BrokerService from "../services/BrokerService";
+import CoinMarketService from "../services/CoinMarketService";
 
 export default class BrokerClientDashboard extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class BrokerClientDashboard extends Component {
         this.userService = UserService.getInstance();
         this.investorService = InvestorService.getInstance();
         this.brokerService = BrokerService.getInstance();
+        this.coinMarketService = CoinMarketService.getInstance();
         this.state = {
             investments: []
         }
@@ -17,15 +19,23 @@ export default class BrokerClientDashboard extends Component {
 
 
     componentDidMount() {
+        let temp = [];
         this.userService.profile().then(
             user => {
                 this.investorService.findTradeByInvestor(user._id)
                     .then(trades => {
                         console.log(trades)
-                        this.setState({
-                            user: user,
-                            investments: trades
-                        })
+                        trades.forEach(trade =>
+                            this.coinMarketService.findCryptoById(trade.crypto)
+                                .then(crypto => {
+                                    console.log(crypto)
+                                    temp.push(crypto);
+                                    this.setState({
+                                        user: user,
+                                        investments: trades,
+                                        cryptos: temp
+                                    })
+                                }))
                     })
             }
         )
@@ -98,10 +108,11 @@ export default class BrokerClientDashboard extends Component {
                         {
                             this.state.investments.filter(trade => trade.sold === false)
                                 .map(investment => {
+                                        let i = this.state.investments.indexOf(investment)
                                         return (
                                             <tr id={"tableRows"}>
                                                 <td>
-                                                    {investment.crypto} ({investment.symbol})
+                                                    {this.state.cryptos[i].data[investment.crypto].name} ({this.state.cryptos[i].data[investment.crypto].symbol})
                                                 </td>
                                                 <td>
                                                     {investment.tokens}
@@ -111,16 +122,16 @@ export default class BrokerClientDashboard extends Component {
                                                 </td>
                                                 <td>
                                                     {(investment.type === 'PROCESSED' &&
-                                                        '$' + investment.dollar_change)
+                                                        '$' + Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price))
                                                     || '-'}
                                                 </td>
                                                 <td>
                                                     {(investment.type === 'PROCESSED' &&
-                                                        investment.percent_change + '%')
+                                                        '$' + (investment.tokens *
+                                                            (Math.round(this.state.cryptos[i].data[investment.crypto].quote.USD.price) - investment.priceWhenBought)))
                                                     || '-'}
                                                 </td>
                                                 <td>
-
                                                     <input placeholder="Amount To Sell"/>
                                                 </td>
                                                 <td>
