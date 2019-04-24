@@ -15,62 +15,72 @@ export default class Followers extends Component {
             all: {},
             fName: [],
             lName: [],
+            ids: [],
+            userId: '',
             brokerName: []
         }
     }
 
     componentDidMount() {
+        this.renderComp();
+    }
 
+    renderComp = () => {
         this.follorService.findFollowingByUserId();
         let userNames = [];
         let lastNames = [];
         let brokerName = [];
+        let ids = [];
         this.userService.profile().then(response => {
             let id = response._id;
             this.follorService.findFollowingByUserId(id).then(follows => {
-                this.setState({all: follows});
+                this.setState({
+                    all: follows,
+                    userId: id
+                });
                 //console.log("HIT:" + JSON.stringify(follows));
             }).then(() => {
-                    this.state.all.following.map(user => {
-                        this.userService.findUserById(user).then(out => {
-                                userNames.push(out.firstName);
-                                lastNames.push(out.lastName);
-                                this.userService.findUserById(out.broker).then(broker =>
-                                    brokerName.push(broker.firstName)
-                                ).then(() =>
-                                    this.setState({
-                                        brokerName: brokerName
-                                    })
-                                )
-                            }
-                        ).then(() =>
-                            this.setState({
-                                fName: userNames,
-                                lName: lastNames
-                            })
-                        )
+                    if (this.state.all) {
+                        this.state.all.following.map(user => {
+                            this.userService.findUserById(user).then(out => {
+                                    userNames.push(out.firstName);
+                                    lastNames.push(out.lastName);
+                                    ids.push(user);
+                                    this.userService.findUserById(out.broker).then(broker =>
+                                        brokerName.push(broker.firstName)
+                                    ).then(() =>
+                                        this.setState({
+                                            brokerName: brokerName
+                                        })
+                                    )
+                                }
+                            ).then(() =>
+                                this.setState({
+                                    fName: userNames,
+                                    ids: ids,
+                                    lName: lastNames
+                                })
+                            )
 
-                    })
-
+                        })
+                    }
                 }
             )
         });
-    }
-
-    renderComp = () => {
-        let buffer = [];
-        this.state.fName.map(user => {
-
-            buffer.push(
-                <td id={"tableRows"}>
-                    {user}
-                </td>
-            )
-        });
-        return buffer;
 
     };
 
+    deleteFollowing = (num) => {
+        console.log(this.state.all);
+        console.log(this.state.ids[num]);
+        console.log(this.state.userId)
+        this.follorService.deleteFromFollowing(this.state.userId, this.state.all,
+            this.state.ids[num], this.state.all._id).then(response => {
+                this.renderComp();
+                console.log(response)
+        });
+
+    }
 
     renderAll = () => {
         let buffer = [];
@@ -85,6 +95,9 @@ export default class Followers extends Component {
                     </td>
                     <td id={"tableRows"}>
                         {this.state.brokerName[a]}
+                    </td>
+                    <td id={"tableRows"}>
+                        <button className={"btn-danger"} onClick={() => this.deleteFollowing(a)}>Delete</button>
                     </td>
                 </tr>
             )
@@ -108,6 +121,7 @@ export default class Followers extends Component {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Broker</th>
+                            <th>Remove Following</th>
                         </tr>
                         </thead>
                         <tbody id={"tableBodyPort"}>
