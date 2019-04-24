@@ -24,4 +24,8 @@ export default class CoinMarketService {
             .then(response => response.json());
     }
 
+    findAllCrypto = () =>{
+        return fetch(CRYPTO_API_URL)
+            .then(response => response.json());
+    }
 }
