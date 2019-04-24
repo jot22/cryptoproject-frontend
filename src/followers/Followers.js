@@ -10,7 +10,8 @@ export default class Followers extends Component {
         this.follorService = FollowersService.getInstance();
         this.state = {
             user: {},
-            following: []
+            following: [],
+            firstNames: []
         }
     }
 
@@ -18,12 +19,7 @@ export default class Followers extends Component {
         let users = [];
         this.userService.profile().then(response => {
             this.follorService.findFollowingByUserId(response._id).then(newResponse => {
-                newResponse.following.map(user => {
-                        this.userService.findUserById(user).then(newestResponse => {
-                            users.push(newestResponse);
-                        })
-                    }
-                )
+                users = newResponse.following;
                 console.log(users);
                 this.setState({
                     user: response,
@@ -32,6 +28,25 @@ export default class Followers extends Component {
             })
         })
     }
+
+    getListOfFirstNames() {
+        let users = [];
+        this.userService.profile().then(response => {
+            this.follorService.findFollowingByUserId(response._id).then(newResponse => {
+                console.log(newResponse.following);
+                users = newResponse.following;
+                newResponse.following.map(user =>
+                    this.userService.findUserById(user).then(newestResponse => {
+
+                    })
+                );
+            });
+            this.setState({
+                user: response
+            })
+        })
+    }
+
 
     render() {
         return (
@@ -51,15 +66,19 @@ export default class Followers extends Component {
                         </thead>
                         <tbody id={"tableBodyPort"}>
                         {
-                            console.log(this.state.following)
-                            // this.state.following.map(user => {
-                            //     console.log(user);
-                            //     return (
-                            //         <tr id={"tableRows"}>
-                            //             {user.firstName}
-                            //         </tr>
-                            //         )
-                            // })
+                            this.state.following.map(user => {
+                                // let i = this.state.following.indexOf(user)
+                                // console.log(user);
+                                // let firstName = '';
+                                // return this.userService.findUserById(this.state.following[i]).then(userIdea =>
+                                //     console.log(userIdea)
+                                // );
+                                return (
+                                    <tr id={"tableRows"}>
+                                        {user}
+                                    </tr>
+                                    )
+                            })
                         }
                         </tbody>
                     </table>

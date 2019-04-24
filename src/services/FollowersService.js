@@ -25,7 +25,6 @@ export default class FollowersService {
             .then(response => response.json());
 
     findFollowingByUserId = (fid) => {
-        console.log(fid);
         let user = {
             user: fid
         }
